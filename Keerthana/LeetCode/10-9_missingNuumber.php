@@ -1,4 +1,4 @@
-lass Solution {
+class Solution {
 
     /**
      * @param Integer[] $nums
