@@ -80,6 +80,7 @@
     foreach($files as $file){
         echo $file . "<br>";
     }
+    
 
 
 
@@ -114,3 +115,36 @@
 // a+t --> append and read text
 // x+b --> create and read binary
 // x+t --> create and read text
+
+
+// | Function               | Description
+
+// | `file_get_contents()`  | Read full file into string         
+// | `file_put_contents()`  | Write string to file               
+// | `fopen()`              | Open a file                        
+// | `fread()`              | Read from a file                   
+// | `fwrite()` / `fputs()` | Write to a file                    
+// | `fclose()`             | Close file handle                  
+// | `feof()`               | Check if end of file reached      
+// | `fgets()` / `fgetss()` | Read line (fgetss strips HTML tags)
+// | `fgetc()`              | Read single character             
+// | `file()`               | Read file into array              
+// | `unlink()`             | Delete a file      
+
+
+
+// | Function        | Description
+
+// | `file_exists()` | Check if file exists        
+// | `is_file()`     | Check if path is a file     
+// | `is_dir()`      | Check if path is a directory
+// | `is_readable()` | Check if file is readable   
+// | `is_writable()` | Check if file is writable  
+// | `filesize()`    | Get file size              
+// | `filetype()`    | Get file type             
+// | `fileatime()`   | Get last access time     
+// | `filemtime()`   | Get last modified time   
+// | `rename()`      | Rename a file            
+// | `mkdir()`       | Create a directory        
+// | `rmdir()`       | Remove a directory        
+// | `scandir()`     | List files in a directory 

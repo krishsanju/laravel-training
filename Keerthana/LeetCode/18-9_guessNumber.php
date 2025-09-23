@@ -10,33 +10,35 @@ function continueGame(){
 $randomValue = rand(1,100);
 echo "I thought of a number from 1 to 100\n";
 // echo $randomValue;
+$maxLimit = 3;
 
 
 do{
+    echo "\nyou have $maxLimit chances\n";
     $userGuess = (int)readline("Try to guess it "); echo "\n";
 
     switch(true){
         case ($userGuess == $randomValue):
-            echo "you won! brooooo \n";
-            $play = false;break;
+            echo "you won! brooooo \n";break;
+            // $play = false;
+            $maxLimit = 0;break;
         case($randomValue-10 <= $userGuess && $userGuess < $randomValue):
-            echo "your number $userGuess is little low! tryyy again \n";
-            $play = continueGame();break;
+            echo "your number $userGuess is little low! tryyy again \n";break;
+            // $play = continueGame();break; break;
         case($randomValue < $userGuess && $userGuess <= $randomValue+10):
-            echo "your number $userGuess is little high! try again \n";
-            $play = continueGame();break;
+            echo "your number $userGuess is little high! try again \n";break;
+            // $play = continueGame();break; break;
         case($userGuess < $randomValue-10):
-            echo "you are too loww :( \n";
-            $play = continueGame();break;
+            echo "you are too loww :( \n";break;
+            // $play = continueGame();break; break;
         case($userGuess > $randomValue+10):
-            echo "you are too highh :( \n";
-            $play = continueGame();break;
+            echo "you are too highh :( \n";break;
+            // $play = continueGame();break; break;
         default:
-        echo "somthing went wrong\n";
-        $play = continueGame();break;
-            
-        
+        echo "somthing went wrong\n";break;
+        // $play = continueGame();break break;
     }
-}while($play);
+    $maxLimit -= 1;
+}while($maxLimit > 0);
 echo "\nThe number is $randomValue";
 ?>
