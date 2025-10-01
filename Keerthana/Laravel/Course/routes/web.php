@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\Post;
 use App\Models\Role;
+use App\Models\Staff;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -38,12 +39,12 @@ Route::get('/', function () {
             }
 
             // --------------- N+1 problem -----------------
-            // $users = User::with('posts')->get();
-            // foreach ($users as $user) {
-            //     foreach ($user->posts as $post) {
-            //         echo $post->user->name.'<br>'; // Uh-oh! More queries here!
-            //     }
-            // }
+            $users = User::with('posts')->get();
+            foreach ($users as $user) {
+                foreach ($user->posts as $post) {
+                    echo $post->user->name.'<br>'; // Uh-oh! More queries here!
+                }
+            }
         });
 
 //Many to Many
@@ -59,3 +60,40 @@ Route::get('/', function () {
                 echo $role->name.'<br>';
             }
         });
+
+
+        // Route::get('/user/{id}', function ($id) {
+        //     $user = User::find($id);
+        //     $user->name = 'xxxx'.$user->name.'0000';
+        //     $user->save();
+        //     return $user;
+        // });
+
+        Route::get('/attach', function () {
+            $user = User::findOrFail(1);
+            $user->roles()->attach(3);
+        });
+
+        Route::get('/detach', function () {
+            $user = User::findOrFail(1);
+            $user->roles()->detach(3);
+        });
+
+        Route::get('/sync', function () {
+            $user = User::findOrFail(2);
+            $user->roles()->sync([1,3]);
+        });
+
+
+// Polymorphic relationships
+
+    Route::get('/create', function () {
+        $staff = Staff::findOrFail(1);
+
+        $staff->photos()->create(['path' => 'image2.png']);
+    });
+
+    Route::get('/read', function () {
+        $staff = Staff::findOrFail(1);
+        $staff->photos;
+    });
