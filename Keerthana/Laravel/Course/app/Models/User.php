@@ -41,8 +41,29 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            // 'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+//ONE TO ONE
+    public function address(){
+        return $this->hasOne('App\Models\Address');
+    }
+
+//ONE TO MANY
+    public function posts(){
+        return $this->hasMany('App\Models\Post');
+    }
+
+    // --------------- N+1 problem -----------------
+    // public function posts(){
+    //     return $this->hasMany('App\Models\Post')->chaperone();
+    // }
+
+
+//MANY TO MANY
+    public function roles(){
+        return $this->belongsToMany('App\Models\Role');
     }
 }
