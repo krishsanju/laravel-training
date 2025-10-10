@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Http\Responses\ApiResponse;
 use App\Http\Resources\ViewPostResource;
 use Illuminate\Validation\ValidationException;
 
@@ -25,45 +26,32 @@ class PostController extends Controller
         
     }
 
-    public function create(){
-        return view('posts.create');
-    }
 
-    public function store(Request $request){
-
+    public function storePost(Request $request){
         $user = User::find(4);
-
+        // $post = $user->posts()->createWithArticle($request->all());
+        // // $post = Post::createWithArticle($request->all());
         $data = $request->all();
-        $data['user_id'] = $user->id;
-        $post = Post::createPost($data);
-        
-        Article::create([
-            'post_id' => $post->id,  'description' => $request->description,
-        ]);
+        $data['user_id'] = $user->id; 
 
-        return response()->json([
-            'status' => 'Success',
-            'post' => $post,
-            'article' => $post->article 
-        ]); 
+        $post = Post::createWithArticle($data);
+        return ApiResponse::setMessage($post, 'Post submitted successfully!')
+                    ->mergeResponse($post->article)
+                    ->send();
     }
 
 
-    public function delete($id){
+    public function deletePost($id){
         $post = Post::find($id);
         if ($post){
             $post->delete();
-
-            return response()->json([
-                'status'=> 'Delete post and article associated with it',
-                'post'=> $post,
-            ]);
+            return ApiResponse::setMessage($post, 'Post and article associated with it are deleted');
         }
 
         return response()->json( "Post not found" );
     }
 
-    public function update($id, Request $request){
+    public function updatePost($id, Request $request){
         $post = Post::find($id);
         
         if ($post){
@@ -78,7 +66,8 @@ class PostController extends Controller
 
             return response()->json([  "status"=> "Successfully updated ", ]);
         }else{
-            return response()->json( "Post not found");  //api resourcse
+            // return response()->json( "Post not found");
+            return ApiResponse::setMessage($post, 'Post not found!');
         }
     }
 }

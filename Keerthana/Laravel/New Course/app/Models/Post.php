@@ -26,4 +26,28 @@ class Post extends Model
             'user_id' => $data['user_id'],
         ]);
     }
+
+
+    public static function createWithArticle($data)
+    {
+        $post = self::create([
+            'user_id' => $data['user_id'],
+            'title' => $data['title'],
+            'image_path' => $data['image_path'],
+            'tags' => $data['tags'],
+        ]);
+
+        $post->article()->create([
+            'post_id' => $post->id,
+            'description' => $data['description']
+        ])->save();
+
+
+        // Article::create([
+        //     'post_id' => $post->id,
+        //     'description' => $description
+        // ]);
+
+        return $post;
+    }
 }

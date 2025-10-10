@@ -12,12 +12,12 @@ class Article extends Model
         return $this->belongsTo(Post::class);
     }
 
-    // public static function createArticle(array $data)
-    // {
-    //     return self::create([
-    //         'post_id' => $data['post_id'],
-    //         'description' => $data['description'],
-    //     ]);
-    // }
+    public static function createArticle(array $data)
+    {
+        return self::create([
+            'post_id' => $data['post_id'],
+            'description' => $data['description'],
+        ]);
+    }
 
 }

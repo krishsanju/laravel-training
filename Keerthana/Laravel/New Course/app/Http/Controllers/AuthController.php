@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Responses\ApiResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,34 +14,19 @@ use PhpOption\None;
 
 class AuthController extends Controller
 {
-    
-    
-    public function registerForm(){ return view('auth.register');}
-    
+        
     public function registerFormSubmit(RegisterRequest $request){
 
-        $user = User::createFormRequest($request->all());
-
-        // Auth::login($user);
-
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'User registered and logged in successfully!',
-            'user' => $user
-        ]);
+        $user = User::createUser($request->all());
+        return ApiResponse::setMessage($user, $message = "User registered in successfully!")->send();;
     }
 
-    public function loginForm(){
-        return view("auth.login");
-    }
-    
     public function loginFormSubmit(LoginRequest $request){
     
         $user = User::verifyCredentials($request->email, $request->password);
 
         if ($user) {
-            // Auth::login($user); 
-            return response()->json(['status' => 'login done']);
+            return ApiResponse::setMessage($user, $message = "User logged in successfully!")->send();;
         }
 
         return back()->withErrors([

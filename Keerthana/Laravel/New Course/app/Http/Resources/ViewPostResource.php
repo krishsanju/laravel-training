@@ -17,6 +17,10 @@ class ViewPostResource extends JsonResource
         return [
             'name'=> $this->name,
             'posts' => $this->posts,
+
+            'role' => $this->user_admin,
         ];
     }
+
+    
 }
