@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -18,22 +19,25 @@ class Post extends Model
         return $this->hasMany(Article::class);
     }
 
-    public static function createPost(array $data){
-        return self::create([
-            'title' => $data['title'],
-            'image_path' => $data['image_path'],
-            'tags' => $data['tags'],
-            'user_id' => $data['user_id'],
-        ]);
-    }
+    // public static function createPost(array $data){
+    //     return self::create([
+    //         'title' => $data['title'],
+    //         // 'image_path' => $data['image_path'],
+    //         // 'image_path' => Storage::disk('public')->put('/',$data['image_path']),
+    //         'image_path' => $data['image_path']->store("posts", "public"),
+    //         'tags' => $data['tags'],
+    //         'user_id' => $data['user_id'],
+    //     ]);
+    // }
 
 
-    public static function createWithArticle($data)
+    public static function createPostWithArticle($data)
     {
         $post = self::create([
             'user_id' => $data['user_id'],
             'title' => $data['title'],
-            'image_path' => $data['image_path'],
+            // 'image_path' => Storage::disk('public')->put('/',$data['image_path']),
+            'image_path' => $data['image_path']->store("posts", "public"),
             'tags' => $data['tags'],
         ]);
 

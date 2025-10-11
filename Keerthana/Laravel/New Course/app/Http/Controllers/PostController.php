@@ -34,7 +34,7 @@ class PostController extends Controller
         $data = $request->all();
         $data['user_id'] = $user->id; 
 
-        $post = Post::createWithArticle($data);
+        $post = Post::createPostWithArticle($data);
         return ApiResponse::setMessage($post, 'Post submitted successfully!')
                     ->mergeResponse($post->article)
                     ->send();

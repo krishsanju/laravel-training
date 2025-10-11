@@ -68,7 +68,7 @@ class ApiResponse
         self::$data = $data;
         self::$message = $message;
 
-        return new static(); // allows chaining
+        return new static(); 
     }
 
     public function mergeResponse(string $extra): static
@@ -85,4 +85,8 @@ class ApiResponse
             'data' => self::$data,
         ], $statusCode);
     }
+
+
+
+    
 } 

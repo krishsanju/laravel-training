@@ -63,6 +63,7 @@ class User extends Authenticatable
     public static function createUser(array $data){
         // info($data);
         return self::create([
+
             'name'=> $data['name'],
             'email'=> $data['email'],
             'password'=> $data['password'],
