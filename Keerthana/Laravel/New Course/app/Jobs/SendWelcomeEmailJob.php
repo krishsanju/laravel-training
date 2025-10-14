@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendWelcomeEmail implements ShouldQueue
+class SendWelcomeEmailJob implements ShouldQueue
 {
     use Queueable;
 
@@ -26,6 +26,7 @@ class SendWelcomeEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user->email)->send(new WelcomeEmail($this->user));
+        info('Job is being processed');
+        Mail::to("kksfeb24@gmail.com")->send(new WelcomeEmail($this->user));
     }
 }

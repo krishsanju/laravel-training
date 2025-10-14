@@ -2,7 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Jobs\SendWelcomeEmail;
+use App\Jobs\SendWelcomeEmailJob;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -43,10 +43,13 @@ Route::get('/cache', function (Request $request) {
 
 
 //QUEUE
-Route::get('/send', function(){
-    $user = User::find(1);
-    dispatch(new SendWelcomeEmail($user));
-});
+// Route::get('/send', function(){
+//     $user = User::find(1);
+//     info('web.php route hit');
+//     dispatch(new SendWelcomeEmailJob($user));
+//     // dd('Email Sent Successfully');
+//     return true;
+// });
 
 
 //MODEL OBSERVER

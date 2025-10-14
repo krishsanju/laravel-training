@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\User;
-use App\Jobs\SendWelcomeEmail;
+use App\Jobs\SendWelcomeEmailJob;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
@@ -9,10 +9,10 @@ use App\Http\Controllers\PostController;
 //QUEUE
 Route::get('/send', function(){
     $user = User::find(1);
-    dispatch(new SendWelcomeEmail($user));
+    dispatch(new SendWelcomeEmailJob($user));
+    return true;
 });
 
 
 //MODEL OBSERVER
-// Route::resource('/posts', PostController::class);
-Route::get('/posts', [PostController::class,'store'])->name('post.save');
+Route::resource('/posts', PostController::class);

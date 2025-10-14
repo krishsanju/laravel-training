@@ -3,15 +3,16 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Events\Dispatchable;
 
 class PostCreateMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, Dispatchable;
 
     /**
      * Create a new message instance.
@@ -37,7 +38,8 @@ class PostCreateMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            text: 'A new post has been created.',
+            // 'A new post has been created.',
+            'welcome',
         );
     }
 

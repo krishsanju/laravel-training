@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreateEvent;
 use App\Models\Post;
 use App\Mail\PostCreateMail;
 use Illuminate\Http\Request;
@@ -30,13 +31,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post();
-        $post->title = 'Test Title';
-        $post->description = 'Test Description';
-        $post->save();
+        event(new PostCreateEvent('Keerthana'));
+        // $post = new Post();
+        // $post->title = 'Test Title';
+        // $post->description = 'Test Description';
+        // $post->save();
 
-        Mail::to('kksfeb24@gmail.com')->send(new PostCreateMail());
-        dd('Mail sent successfully');
+        // dd('Mail sent successfully');
     }
 
     /**

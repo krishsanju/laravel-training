@@ -20,37 +20,46 @@ class WelcomeEmail extends Mailable
      */
     public function __construct($user)
     {
+        info('welcome email constructor loaded');
         $this->user = $user;
     }
 
     /**
      * Get the message envelope.
      */
-    public function envelope(): Envelope
+    // public function envelope(): Envelope
+    // {
+    //     return new Envelope(
+    //         subject: 'Welcome Email',
+    //     );
+    // }
+
+    // /**
+    //  * Get the message content definition.
+    //  */
+    public function content(): Content
     {
-        return new Envelope(
-            subject: 'Welcome Email',
+        info('welcome email view loaded');
+
+        return new Content(
+            view: 'welcome',
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            // view: 'view.name',
-            text: "welcome {$this->user}",
-        );
-    }
+    //   public function build()
+    // {
+    //     return $this->subject('Your Order Has Been Shipped')
+    //                 ->view('welcome')
+    //                 ->with(['order' => 'order1']);
+    // }
 
     /**
      * Get the attachments for the message.
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments(): array
-    {
-        return [];
-    }
+    // public function attachments(): array
+    // {
+    //     return [];
+    // }
 }

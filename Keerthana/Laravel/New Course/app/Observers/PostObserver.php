@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Mail\PostCreateMail;
+use Illuminate\Support\Facades\Mail;
 
 class PostObserver
 {
@@ -11,7 +13,7 @@ class PostObserver
      */
     public function created(Post $post): void
     {
-        //
+        Mail::to('kksfeb24@gmail.com')->send(new PostCreateMail());
     }
 
     /**
