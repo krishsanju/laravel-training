@@ -1,0 +1,248 @@
+[2025-10-13 15:46:48] local.INFO: array (
+  'city' => 'Visakhapatnam',
+  'start_date' => '2025-10-01',
+  'end_date' => '2025-10-13',
+  'daily' => 'temperature_2m_mean,precipitation_sum',
+)  
+[2025-10-13 15:46:48] local.INFO: ------------  
+[2025-10-13 15:49:56] local.INFO: array (
+  'city' => 'Visakhapatnam',
+  'start_date' => NULL,
+  'end_date' => '2025-10-13',
+  'daily' => 'temperature_2m_mean,precipitation_sum',
+)  
+[2025-10-13 15:49:56] local.INFO: ------------  
+[2025-10-13 15:50:05] local.ERROR: Class "App\Http\Controllers\HistoryDataRequest" does not exist {"exception":"[object] (ReflectionException(code: -1): Class \"App\\Http\\Controllers\\HistoryDataRequest\" does not exist at C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResolvesRouteDependencies.php:88)
+[stacktrace]
+#0 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResolvesRouteDependencies.php(88): ReflectionClass->__construct('App\\\\Http\\\\Contro...')
+#1 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResolvesRouteDependencies.php(51): Illuminate\\Routing\\ControllerDispatcher->transformDependency(Object(ReflectionParameter), Array, Object(stdClass))
+#2 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResolvesRouteDependencies.php(30): Illuminate\\Routing\\ControllerDispatcher->resolveMethodDependencies(Array, Object(ReflectionMethod))
+#3 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(59): Illuminate\\Routing\\ControllerDispatcher->resolveClassMethodDependencies(Array, Object(App\\Http\\Controllers\\HistoryDataController), 'getHistoricalWe...')
+#4 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(40): Illuminate\\Routing\\ControllerDispatcher->resolveParameters(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HistoryDataController), 'getHistoricalWe...')
+#5 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(265): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HistoryDataController), 'getHistoricalWe...')
+#6 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(211): Illuminate\\Routing\\Route->runController()
+#7 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(822): Illuminate\\Routing\\Route->run()
+#8 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}(Object(Illuminate\\Http\\Request))
+#10 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#11 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(821): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#13 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(764): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#15 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}(Object(Illuminate\\Http\\Request))
+#18 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}(Object(Illuminate\\Http\\Request))
+#19 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#25 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(61): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#29 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#31 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#34 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#36 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#37 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#38 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#40 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\LENOVO...')
+#42 {main}
+"} 
+[2025-10-13 16:23:15] local.ERROR: Command "make:resources" is not defined.
+
+Did you mean one of these?
+    make:cache-table
+    make:cast
+    make:channel
+    make:class
+    make:command
+    make:component
+    make:config
+    make:controller
+    make:enum
+    make:event
+    make:exception
+    make:factory
+    make:interface
+    make:job
+    make:job-middleware
+    make:listener
+    make:mail
+    make:middleware
+    make:migration
+    make:model
+    make:notification
+    make:notifications-table
+    make:observer
+    make:policy
+    make:provider
+    make:queue-batches-table
+    make:queue-failed-table
+    make:queue-table
+    make:request
+    make:resource
+    make:rule
+    make:scope
+    make:seeder
+    make:session-table
+    make:test
+    make:trait
+    make:view {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"make:resources\" is not defined.
+
+Did you mean one of these?
+    make:cache-table
+    make:cast
+    make:channel
+    make:class
+    make:command
+    make:component
+    make:config
+    make:controller
+    make:enum
+    make:event
+    make:exception
+    make:factory
+    make:interface
+    make:job
+    make:job-middleware
+    make:listener
+    make:mail
+    make:middleware
+    make:migration
+    make:model
+    make:notification
+    make:notifications-table
+    make:observer
+    make:policy
+    make:provider
+    make:queue-batches-table
+    make:queue-failed-table
+    make:queue-table
+    make:request
+    make:resource
+    make:rule
+    make:scope
+    make:seeder
+    make:session-table
+    make:test
+    make:trait
+    make:view at C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\symfony\\console\\Application.php:743)
+[stacktrace]
+#0 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->find('make:resources')
+#1 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\symfony\\console\\Application.php(194): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#5 {main}
+"} 
+[2025-10-13 16:52:59] local.ERROR: Attempt to read property "location" on array {"exception":"[object] (ErrorException(code: 0): Attempt to read property \"location\" on array at C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\DelegatesToResource.php:139)
+[stacktrace]
+#0 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'C:\\\\Users\\\\LENOVO...', 139)
+#1 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\DelegatesToResource.php(139): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Attempt to read...', 'C:\\\\Users\\\\LENOVO...', 139)
+#2 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\app\\Http\\Resources\\HistoryWeatherDataResource.php(18): Illuminate\\Http\\Resources\\Json\\JsonResource->__get('location')
+#3 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\JsonResource.php(114): App\\Http\\Resources\\HistoryWeatherDataResource->toArray(Object(Illuminate\\Http\\Request))
+#4 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\Json\\JsonResource.php(274): Illuminate\\Http\\Resources\\Json\\JsonResource->resolve(Object(Illuminate\\Http\\Request))
+#5 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Client\\PendingRequest.php(1231): Illuminate\\Http\\Resources\\Json\\JsonResource->jsonSerialize()
+#6 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Client\\PendingRequest.php(1184): Illuminate\\Http\\Client\\PendingRequest->parseRequestData('GET', 'https://archive...', Array)
+#7 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Client\\PendingRequest.php(944): Illuminate\\Http\\Client\\PendingRequest->sendRequest('GET', 'https://archive...', Array)
+#8 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(329): Illuminate\\Http\\Client\\PendingRequest->{closure:Illuminate\\Http\\Client\\PendingRequest::send():942}(1)
+#9 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Client\\PendingRequest.php(942): retry(0, Object(Closure), 100, Object(Closure))
+#10 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Client\\PendingRequest.php(798): Illuminate\\Http\\Client\\PendingRequest->send('GET', 'https://archive...', Array)
+#11 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\app\\Models\\HistoryData.php(49): Illuminate\\Http\\Client\\PendingRequest->get('https://archive...', Object(App\\Http\\Resources\\HistoryWeatherDataResource))
+#12 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\app\\Http\\Controllers\\HistoryDataController.php(24): App\\Models\\HistoryData::urlFilteredResponse(Object(App\\Http\\Resources\\HistoryWeatherDataResource))
+#13 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(46): App\\Http\\Controllers\\HistoryDataController->getHistoricalWeather(Object(App\\Http\\Requests\\HistoryDataRequest))
+#14 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(265): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HistoryDataController), 'getHistoricalWe...')
+#15 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(211): Illuminate\\Routing\\Route->runController()
+#16 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(822): Illuminate\\Routing\\Route->run()
+#17 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}(Object(Illuminate\\Http\\Request))
+#18 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}(Object(Illuminate\\Http\\Request))
+#19 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#21 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(821): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#22 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#23 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(764): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#24 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#25 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#31 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(61): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#38 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#40 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#42 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#44 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#46 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#47 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#49 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#50 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\LENOVO...')
+#51 {main}
+"} 
+[2025-10-13 16:53:56] local.ERROR: Attempt to read property "location" on array {"exception":"[object] (ErrorException(code: 0): Attempt to read property \"location\" on array at C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\DelegatesToResource.php:139)
+[stacktrace]
+#0 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'C:\\\\Users\\\\LENOVO...', 139)
+#1 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Resources\\DelegatesToResource.php(139): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'Attempt to read...', 'C:\\\\Users\\\\LENOVO...', 139)
+#2 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\app\\Http\\Resources\\HistoryWeatherDataResource.php(18): Illuminate\\Http\\Resources\\Json\\JsonResource->__get('location')
+#3 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\app\\Http\\Controllers\\HistoryDataController.php(22): App\\Http\\Resources\\HistoryWeatherDataResource->toArray(Object(Illuminate\\Http\\Request))
+#4 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(46): App\\Http\\Controllers\\HistoryDataController->getHistoricalWeather(Object(App\\Http\\Requests\\HistoryDataRequest))
+#5 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(265): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\HistoryDataController), 'getHistoricalWe...')
+#6 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(211): Illuminate\\Routing\\Route->runController()
+#7 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(822): Illuminate\\Routing\\Route->run()
+#8 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Router->{closure:Illuminate\\Routing\\Router::runRouteWithinStack():821}(Object(Illuminate\\Http\\Request))
+#9 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}(Object(Illuminate\\Http\\Request))
+#10 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#11 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#12 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(821): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#13 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(800): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#14 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(764): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#15 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(753): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#17 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():197}(Object(Illuminate\\Http\\Request))
+#18 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():178}(Object(Illuminate\\Http\\Request))
+#19 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#25 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(109): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#27 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(61): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#29 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#31 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#33 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#34 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePathEncoding.php(26): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(219): Illuminate\\Http\\Middleware\\ValidatePathEncoding->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#36 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(137): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():194}:195}(Object(Illuminate\\Http\\Request))
+#37 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#38 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#40 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\public\\index.php(20): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\LENOVO\\Desktop\\LARAVEL\\laravel-training\\Keerthana\\Laravel\\weather-app\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\LENOVO...')
+#42 {main}
+"} 
