@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\GeoLocation;
+use App\Http\Responses\ApiResponse;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -50,9 +51,9 @@ class HistoryData extends Model
 
 
         if ($response->failed()) {
-            throw new HttpResponseException(response()->json([
-                'message' => 'Failed to fetch weather data from API'
-            ], 500));
+            throw new HttpResponseException(
+                ApiResponse::error('Failed to fetch weather data from API', 500)
+        );
         }
 
        $weatherData = array_map(function($date, $temp, $precipitation) {
@@ -70,19 +71,39 @@ class HistoryData extends Model
 
         self::storeWeatherData($city, $weatherData);
 
-        return response()->json(compact('latitude', 'longitude', 'timezone', 'weatherData'));
+        // return response()->json(compact('latitude', 'longitude', 'timezone', 'weatherData'));
+        return ApiResponse::setMessage([
+            'latitude'     => $latitude,
+            'longitude'    => $longitude,
+            'timezone'     => $timezone,
+            'weatherData'  => $weatherData,
+        ], 'Weather data fetched successfully');
     }
 
 
     public static function storeWeatherData(string $city, array $weatherData): void
     {
-        foreach ($weatherData as $day) {
-            self::create([
+        // foreach ($weatherData as $day) {
+        //     self::create([
+        //         'city' => $city,
+        //         'date' => $day['date'],
+        //         'temperature' => $day['temperature'],
+        //         'precipitation' => $day['precipitation'],
+        //     ]);
+        // }
+
+
+        self::insert(collect($weatherData)->map(function ($day) use ($city) {
+            return [
                 'city' => $city,
                 'date' => $day['date'],
                 'temperature' => $day['temperature'],
                 'precipitation' => $day['precipitation'],
-            ]);
-        }
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        })->all());
+
+
     }
 }

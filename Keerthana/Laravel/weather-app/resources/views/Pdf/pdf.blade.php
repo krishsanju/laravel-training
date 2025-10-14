@@ -34,7 +34,7 @@
     <div class="section-title">Skills:</div>
     <div class="content">
         <ul>
-            @foreach(explode(',', $data['skills']) as $skill)
+            @foreach($data['skills'] as $skill)
                 <li>{{ $skill }}</li>
             @endforeach
         </ul>
@@ -44,8 +44,14 @@
     <div class="section-title">Education:</div>
     <div class="content">
         <ul>
-            @foreach(explode(',', $data['education']) as $edu)
-                <li>{{ $edu }}</li>
+            @foreach($data['education'] as $edu)
+                <li>
+                    @if(is_array($edu))
+                        {{ $edu['degree'] ?? '' }} - {{ $edu['institution'] ?? '' }} ({{ $edu['year'] ?? '' }})
+                    @else
+                        {{ $edu }}
+                    @endif
+                </li>
             @endforeach
         </ul>
     </div>
@@ -54,7 +60,7 @@
     <div class="section-title">Certificates:</div>
     <div class="content">
         <ul>
-            @foreach(explode(',', $data['certificates']) as $cert)
+            @foreach($data['certificates'] as $cert)
                 <li>{{ $cert }}</li>
             @endforeach
         </ul>
@@ -64,8 +70,14 @@
     <div class="section-title">Projects:</div>
     <div class="content">
         <ul>
-            @foreach(explode(',', $data['projects']) as $project)
-                <li>{{ $project }}</li>
+            @foreach($data['projects'] as $project)
+                <li>
+                    @if(is_array($project))
+                        {{ $project['title'] ?? '' }} - {{ $project['description'] ?? '' }}
+                    @else
+                        {{ $project }}
+                    @endif
+                </li>
             @endforeach
         </ul>
     </div>
@@ -74,7 +86,7 @@
     <div class="section-title">Hobbies:</div>
     <div class="content">
         <ul>
-            @foreach(explode(',', $data['hobbies']) as $hobby)
+            @foreach($data['hobbies'] as $hobby)
                 <li>{{ $hobby }}</li>
             @endforeach
         </ul>
@@ -84,8 +96,14 @@
     <div class="section-title">Work Experience:</div>
     <div class="content">
         <ul>
-            @foreach(explode(',', $data['experiences']) as $experience)
-                <li>{{ $experience }}</li>
+            @foreach($data['experiences'] as $experience)
+                <li>
+                    @if(is_array($experience))
+                        {{ $experience['role'] ?? '' }} at {{ $experience['company'] ?? '' }} {{ $experience['years'] ?? '' }}
+                    @else
+                        {{ $experience }}
+                    @endif
+                </li>
             @endforeach
         </ul>
     </div>

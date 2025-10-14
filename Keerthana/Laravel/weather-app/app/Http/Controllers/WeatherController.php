@@ -24,11 +24,6 @@ class WeatherController extends Controller
 
         $data =  new WeatherResource($request->all());
 
-        // $corredinates = getLatitudeLongitude();
-        info('------------------------------');
-        info($data);
-        info('------------------------------');
-
         Response::make(json_encode($data));
         $response = Http::withoutVerifying()->get($apiUrls,  (array) $data);
 

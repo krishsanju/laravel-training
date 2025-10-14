@@ -9,21 +9,11 @@ use Illuminate\Support\Facades\Http;
 class GeoLocationController extends Controller
 {
     public function locationDetails(Request $request){
-        $city = $request->input('city');
+        $city = strtolower($request->input('city')); //validation for city not done
 
-        $result =  GeoLocation::urlResponse($city);
+        $geolocation = new GeoLocation();
+        $result =  $geolocation->urlResponse($city);
+        return $geolocation->storeLocationData($result);
 
-        return GeoLocation::storeLocationData($result);
-        
-        // $response = Http::withoutV
-        // return response()->json([
-        //     'latitude' => $locationData['latitude'],
-        //     'longitude' => $locationData['longitude'],
-        //     'name' => $locationData['name'],
-        //     'country' => $locationData['country'],
-        //     'admin1' => $locationData['admin1'] ?? null,
-        //     'admin2' => $locationData['admin2'] ?? null,
-        //      'timezone' => $locationData['timezone'] ?? null,
-        // ]);
     }
 }

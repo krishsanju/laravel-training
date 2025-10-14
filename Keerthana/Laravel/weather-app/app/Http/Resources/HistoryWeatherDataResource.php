@@ -14,16 +14,15 @@ class HistoryWeatherDataResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return  [
-        //     'latitude' => $this->input('latitude'),
-        //     'longitude' => $this->input('longitude'),
-        //     'start_date' => $this->input('start_date'),
-        //     'end_date' => $this->input('end_date'),
-        //     'daily' => $this->input('daily'),
-        //     'timezone' => $this->input('timezone'),
-        // ];
-
-        return [   ];
+        return [
+            'latitude' => $this->location->latitude,
+            'longitude' => $this->location->longitude,
+            'start_date' => $this['start_date'],
+            'end_date' => $this['end_date'],
+            'daily' => $this['daily'],
+            'timezone' => $this->location->timezone,
+            'city' => $this->location->name,
+        ];
     }
 
 }

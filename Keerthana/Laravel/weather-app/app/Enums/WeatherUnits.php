@@ -17,7 +17,6 @@ final class WeatherUnits extends Enum
 
     public static function getDescription(mixed $value): string
     {
-        info($value);
         return match($value){
             self::Standard => "standard",
             self::Metric => "metric",

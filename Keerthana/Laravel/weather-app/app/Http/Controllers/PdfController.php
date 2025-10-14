@@ -13,7 +13,8 @@ class PdfController extends Controller
 {
     public function createPdf(Request $request){
 
-        $data = new  PdfResource($request->all());
+        // $data = new  PdfResource($request->all());
+        $data = config('resume');
 
        
 

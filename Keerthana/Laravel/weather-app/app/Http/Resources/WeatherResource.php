@@ -15,7 +15,6 @@ class WeatherResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
         return [
             'lat' => $request->latitude,
             'lon' => $request->longitude,
