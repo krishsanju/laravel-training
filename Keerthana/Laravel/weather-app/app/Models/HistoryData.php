@@ -21,11 +21,12 @@ class HistoryData extends Model
 
 
     public static function getOrCreateByCity($city){
-        $location = GeoLocation::where('name', $city)->first();
+        $geoLocation = new GeoLocation();
+        $location = $geoLocation->where('name', $city)->first();
         if($location){ return $location;}
         
-        $locationData = GeoLocation::urlResponse($city);
-        return GeoLocation::create($locationData);
+        $locationData = $geoLocation->urlResponse($city);
+        return $geoLocation->create($locationData);
         
     }
 
@@ -52,7 +53,7 @@ class HistoryData extends Model
 
         if ($response->failed()) {
             throw new HttpResponseException(
-                ApiResponse::error('Failed to fetch weather data from API', 500)
+                ApiResponse::setMessage('Failed to fetch weather data from API', false)->retrunResponse(500)
         );
         }
 
@@ -71,28 +72,17 @@ class HistoryData extends Model
 
         self::storeWeatherData($city, $weatherData);
 
-        // return response()->json(compact('latitude', 'longitude', 'timezone', 'weatherData'));
-        return ApiResponse::setMessage([
-            'latitude'     => $latitude,
+        return ApiResponse::setMessage('Weather data fetched successfully', true)->setData([
+            'latitude'=> $latitude,
             'longitude'    => $longitude,
             'timezone'     => $timezone,
             'weatherData'  => $weatherData,
-        ], 'Weather data fetched successfully');
+        ])->retrunResponse(200);
     }
 
 
     public static function storeWeatherData(string $city, array $weatherData): void
     {
-        // foreach ($weatherData as $day) {
-        //     self::create([
-        //         'city' => $city,
-        //         'date' => $day['date'],
-        //         'temperature' => $day['temperature'],
-        //         'precipitation' => $day['precipitation'],
-        //     ]);
-        // }
-
-
         self::insert(collect($weatherData)->map(function ($day) use ($city) {
             return [
                 'city' => $city,

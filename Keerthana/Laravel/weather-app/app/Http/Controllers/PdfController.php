@@ -16,8 +16,6 @@ class PdfController extends Controller
         // $data = new  PdfResource($request->all());
         $data = config('resume');
 
-       
-
         $pdf = PDF::loadView('Pdf.pdf', ['data' => $data]);
         return PdfModel::storePdfDownload($pdf);
 
