@@ -41,13 +41,7 @@ class SendResumeMail extends Mailable
     {
         return new Content(
             // view: 'view.name',
-            view: 'emails.sendResumeMail',
-            // text: '',
-            // html:' <h1> Hey Mentor! </h1>
-            //         <p> This is a mail from your mentee Keerthana 😁 <br> 
-            //         I have attached my resume with this mail. Please have a look at it. </p>
-            //         <p> Thank you! </p>
-            //         <p> Regards, <br> Keerthana </p>',
+            view: 'emails.mailStructure'
         );
     }
 

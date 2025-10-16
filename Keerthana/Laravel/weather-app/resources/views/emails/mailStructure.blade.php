@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Hey Mentor! </h1>
-    <p> This is a mail from your mentee Keerthana 😁 <br> I have attached my resume with this mail. Please have a look at it. </p>
+    <h1> Hey! </h1>
+    <p> This is Keerthana 😁 <br> I have attached my resume with this mail. Please have a look at it. </p>
     <p> Thank you! </p>
     <p> Regards, <br> Keerthana </p>
 </body>
