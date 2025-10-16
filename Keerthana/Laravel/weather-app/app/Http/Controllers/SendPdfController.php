@@ -17,6 +17,9 @@ class SendPdfController extends Controller
 
         SendPdf::grabPdfSendMail($email);
 
-        return ApiResponse::setMessage('Mail sent successfully to '.$email)->retrunResponse(200);
+        $apiResponse=new ApiResponse;
+
+        $apiResponse->setMessage('Mail sent successfully to '.$email);
+       return  $apiResponse->retrunResponse(200);
     }
 }

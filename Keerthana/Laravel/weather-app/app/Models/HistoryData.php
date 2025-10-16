@@ -52,9 +52,13 @@ class HistoryData extends Model
 
 
         if ($response->failed()) {
+            $apiResponse=new ApiResponse;
+
+            $apiResponse->setMessage('Failed to fetch weather data from API', false);
+
             throw new HttpResponseException(
-                ApiResponse::setMessage('Failed to fetch weather data from API', false)->retrunResponse(500)
-        );
+                  $apiResponse->retrunResponse(500)
+            );
         }
 
        $weatherData = array_map(function($date, $temp, $precipitation) {
@@ -72,12 +76,17 @@ class HistoryData extends Model
 
         self::storeWeatherData($city, $weatherData);
 
-        return ApiResponse::setMessage('Weather data fetched successfully', true)->setData([
+
+        $apiResponse=new ApiResponse;
+
+        $apiResponse->setMessage('Weather data fetched successfully', true);
+        $apiResponse->setData([
             'latitude'=> $latitude,
             'longitude'    => $longitude,
             'timezone'     => $timezone,
             'weatherData'  => $weatherData,
-        ])->retrunResponse(200);
+        ]);
+       return  $apiResponse->retrunResponse(200);
     }
 
 

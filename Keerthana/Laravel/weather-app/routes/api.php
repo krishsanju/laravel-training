@@ -18,20 +18,7 @@ Route::get('/get-temperature', [WeatherController::class,'getTemperature']);
 
 
 Route::get('/pdf', [PdfController::class,'createPdf']);
-// Route::get('/send-pdf/{email}', function ($email){
 
-//     $files = File::files(storage_path('app\public\Pdfs'));
-//     if (empty($files)) {
-//         return ApiResponse::setMessage('No files found in the public storage.')->retrunResponse(404);
-//     }
-//     $firstPdf = $files[0]->getRealPath();
-
-
-//     event(new SendResumeMailEvent($email, $firstPdf));
-
-//     return ApiResponse::setMessage('Mail sent successfully to '.$email)->retrunResponse(200);
-
-// });
 
 Route::post('/send-pdf', [SendPdfController::class, 'sendMailWithPdf']);
 

@@ -12,7 +12,13 @@ class SendPdf extends Model
     public static function grabPdfSendMail($email){
         $files = File::files(storage_path('app\public\Pdfs'));
         if (empty($files)) {
-            return ApiResponse::setMessage('No files found in the public storage.')->retrunResponse(404);
+            // return(new ApiResponse)->setMessage('No files found in the public storage.')->retrunResponse(404);
+
+            $apiResponse=new ApiResponse;
+
+            $apiResponse->setMessage('No files found in the public storage.');
+            return  $apiResponse->retrunResponse(404);
+            
         }
         $firstPdf = $files[0]->getRealPath();
 

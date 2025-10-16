@@ -26,15 +26,23 @@ class GeoLocation extends Model
 
 
         if ($response->failed()) {
+            $apiResponse=new ApiResponse;
+
+            $apiResponse->setMessage('Failed to fetch location data', false);
+
             throw new HttpResponseException(
-                  ApiResponse::setMessage('Failed to fetch location data', false)->retrunResponse(500)
+                  $apiResponse->retrunResponse(500)
             );
         }
 
         if (empty($response['results'])) {
+            $apiResponse=new ApiResponse;
+
+            $apiResponse->setMessage('No results found for the specified city', false);
+
             throw new HttpResponseException(
-                ApiResponse::setMessage('No results found for the specified city', false)->retrunResponse(404)
-            ); 
+                  $apiResponse->retrunResponse(404)
+            );
         }
         //in providers
 
@@ -55,6 +63,10 @@ class GeoLocation extends Model
             ]);
 
 
-            return ApiResponse::setMessage('Location stored successfully', true)->setData(['location' => $location])->retrunResponse(201); 
+            // return ApiResponse::setMessage('Location stored successfully', true)->setData(['location' => $location])->retrunResponse(201); 
+            $apiResponse=new ApiResponse;
+
+            $apiResponse->setMessage('Location stored successfully', true);
+            $apiResponse->retrunResponse(201);
     }
 }
