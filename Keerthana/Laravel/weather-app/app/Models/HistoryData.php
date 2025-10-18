@@ -46,7 +46,7 @@ class HistoryData extends Model
         ];
     }
 
-    public static function urlFilteredResponse($parameters){
+    public static function getResponse($parameters){
 
         $response = Http::withoutVerifying()->get(config('services.apiUrls.history_url'), $parameters);
 
@@ -60,6 +60,14 @@ class HistoryData extends Model
                   $apiResponse->retrunResponse(500)
             );
         }
+
+        return $response;
+    }
+
+    public static function urlFilteredResponse($parameters){
+
+        $response = self::getResponse($parameters);
+
 
        $weatherData = array_map(function($date, $temp, $precipitation) {
             return [
