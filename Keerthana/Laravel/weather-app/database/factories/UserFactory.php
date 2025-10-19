@@ -41,4 +41,20 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function withState(string $state){
+        $city = [
+            'north' => ['Delhi', 'Chandigarh', 'Lucknow', 'Jaipur', 'Dehradun'],
+            'south' => ['Hyderabad', 'Chennai', 'Bangalore', 'Kochi', 'Visakhapatnam'],
+            'east' => ['Kolkata', 'Patna', 'Ranchi', 'Guwahati'],
+            'west' => ['Mumbai', 'Ahmedabad', 'Pune', 'Surat'],
+        ];
+        
+        return $this->state(function (array $attributes) use ($state, $city) {
+            $cities = $city[$state] ?? $city['north'];
+            return [
+                'city' => $this->faker->randomElement($cities),
+            ];
+        }); 
+    }
 }
