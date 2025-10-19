@@ -17,56 +17,56 @@ class GeoLocation extends Model
 
     protected $table = 'locations';
 
-    public static function urlResponse($city){
-        //in providers
-        $response = Http::withoutVerifying()->get(config('services.apiUrls.geocoding_url'), [
-            'name' => $city,
-            'count' => 10,
-        ]);
+    // public static function urlResponse($city){
+    //     //in providers
+    //     $response = Http::withoutVerifying()->get(config('services.apiUrls.geocoding_url'), [
+    //         'name' => $city,
+    //         'count' => 10,
+    //     ]);
 
 
-        if ($response->failed()) {
-            $apiResponse=new ApiResponse;
+    //     if ($response->failed()) {
+    //         $apiResponse=new ApiResponse;
 
-            $apiResponse->setMessage('Failed to fetch location data', false);
+    //         $apiResponse->setMessage('Failed to fetch location data', false);
 
-            throw new HttpResponseException(
-                  $apiResponse->retrunResponse(500)
-            );
-        }
+    //         throw new HttpResponseException(
+    //               $apiResponse->retrunResponse(500)
+    //         );
+    //     }
 
-        if (empty($response['results'])) {
-            $apiResponse=new ApiResponse;
+    //     if (empty($response['results'])) {
+    //         $apiResponse=new ApiResponse;
 
-            $apiResponse->setMessage('No results found for the specified city', false);
+    //         $apiResponse->setMessage('No results found for the specified city', false);
 
-            throw new HttpResponseException(
-                  $apiResponse->retrunResponse(404)
-            );
-        }
-        //in providers
+    //         throw new HttpResponseException(
+    //               $apiResponse->retrunResponse(404)
+    //         );
+    //     }
+    //     //in providers
 
-        $locationData = $response['results'][0];
+    //     $locationData = $response['results'][0];
 
-        return new GeolocationResource($locationData);
-    }
+    //     return new GeolocationResource($locationData);
+    // }
 
-    public static function storeLocationData($locationData){
-        $location = self::create([
-                'name' => $locationData['name'],
-                'country' => $locationData['country'],
-                'state' => $locationData['admin1'] ?? null,
-                'reference_location' => $locationData['admin2'] ?? null,
-                'latitude' => $locationData['latitude'],
-                'longitude' => $locationData['longitude'],
-                'timezone' => $locationData['timezone'],
-            ]);
+    // public static function storeLocationData($locationData){
+    //     $location = self::create([
+    //             'name' => $locationData['name'],
+    //             'country' => $locationData['country'],
+    //             'state' => $locationData['admin1'] ?? null,
+    //             'reference_location' => $locationData['admin2'] ?? null,
+    //             'latitude' => $locationData['latitude'],
+    //             'longitude' => $locationData['longitude'],
+    //             'timezone' => $locationData['timezone'],
+    //         ]);
 
 
-            // return ApiResponse::setMessage('Location stored successfully', true)->setData(['location' => $location])->retrunResponse(201); 
-            $apiResponse=new ApiResponse;
+    //         // return ApiResponse::setMessage('Location stored successfully', true)->setData(['location' => $location])->retrunResponse(201); 
+    //         $apiResponse=new ApiResponse;
 
-            $apiResponse->setMessage('Location stored successfully', true);
-            $apiResponse->retrunResponse(201);
-    }
+    //         $apiResponse->setMessage('Location stored successfully', true);
+    //         $apiResponse->retrunResponse(201);
+    // }
 }
