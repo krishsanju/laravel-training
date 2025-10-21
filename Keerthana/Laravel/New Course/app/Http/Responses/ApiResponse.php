@@ -12,9 +12,8 @@ class ApiResponse
         $this->response = $response;
     }
 
-    public function setMessage(string $message, bool $isSuccess = true)
+    public function setMessage(string $message)
     {
-        $this->response['status'] = $isSuccess;
         $this->response['message'] = $message;
         return  $this->response;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Categories;
 use Illuminate\Database\Eloquent\Model;
 
 class GnewsTop extends Model
@@ -22,9 +23,10 @@ class GnewsTop extends Model
         'source_country',
     ];
 
-    // protected $casts = [
-    //     'published_at' => 'datetime',
-    // ];
+    protected $casts = [
+        // 'published_at' => 'datetime',
+        'category' => Categories::class,
+    ];
 
 
     public static function storeArticles($articles, $category)
@@ -51,25 +53,33 @@ class GnewsTop extends Model
         
 
         self::upsert(
-        $data,
-        ['article_id'],
-        [               
-            'title',
-            'category',
-            'description',
-            'content',
-            // 'url',
-            // 'image',
-            'published_at',
-            'language',
-            'source_id',
-            'source_name',
-            // 'source_url',
-            'source_country',
-            'updated_at'
-        ]
-    );
-        
-        
+            $data,
+            ['article_id', 'title', 'category'],
+            [               
+                'title',
+                'category',
+                'description',
+                'content',
+                // 'url',
+                // 'image',
+                'published_at',
+                'language',
+                'source_id',
+                'source_name',
+                // 'source_url',
+                'source_country',
+                'updated_at'
+            ]
+        ); 
+    }
+
+    public static function fetchCategoryNews($category)
+    {
+
+        $categoryEnum = Categories::fromKey(strtoupper($category));
+        $data = self::whereCategory($categoryEnum)->get();
+
+        return $data;
+
     }
 }

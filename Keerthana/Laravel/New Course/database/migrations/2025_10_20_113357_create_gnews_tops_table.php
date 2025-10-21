@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('gnews_tops', function (Blueprint $table) {
             $table->id();
-            $table->string('article_id')->unique(); // maps to "id" from API
+            $table->string('article_id')->unique();
             $table->string('title');
-            $table->string('category')->default('general');
+            // $table->string('category')->default('general');
+            $table->unsignedTinyInteger('category')->default(0);
             $table->text('description')->nullable();
             $table->longText('content')->nullable();
             // $table->string('url')->nullable();

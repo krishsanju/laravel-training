@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\GnewsTop;
+use App\Enums\Categories;
 use App\Clients\GnewsClient;
 
 class GnewsService
@@ -14,21 +15,17 @@ class GnewsService
     }
 
     public function fetchNews(){
-        // info('in Service');
-        // $response =  $this->gnewsClient->fetchTopHeadlines()->json();
-        // return GnewsTop::storeArticles($response['articles']);
-
-        $categories = array('general', 'world', 'nation', 'business', 'technology', 'entertainment', 'sports', 'science' , 'health');
-
-
-        foreach ($categories as $category) {
-            info("Fetching category: $category");
-
-            $response = $this->gnewsClient->fetchTopHeadlines($category)->json();
-
-            GnewsTop::storeArticles($response['articles'], $category);
+        try {
+            foreach (Categories::getInstances() as $categoryEnum) {
+                $categoryKey = strtolower($categoryEnum->key);  // e.g., "general"
+                $articles = $this->gnewsClient->fetchTopHeadlines($categoryKey);
+                GnewsTop::storeArticles($articles, $categoryEnum->value); // 👈 pass integer value
+            }
+            return true;
+        } catch (\Exception $e) {
+            info($e->getMessage());
+            return false;
         }
-
-        return true;
+        
     }
 }
