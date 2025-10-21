@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'apiKeys' => [
+        'gnews' => env('GNEWS_API_KEY')
+    ],
+
+    'endPoints' =>[
+        'gnewsTopHeadlines' => env('GNEWS_TOP_HEADLINES_ENDPOINT'),
+    ]
+
 ];
