@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'endPoints' => [
+        'restCountries'=> env('REST_COUNTRIES_ENDPOINT'),
+    ]
+
 ];
