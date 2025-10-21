@@ -17,9 +17,9 @@ class GnewsService
     public function fetchNews(){
         try {
             foreach (Categories::getInstances() as $categoryEnum) {
-                $categoryKey = strtolower($categoryEnum->key);  // e.g., "general"
+                $categoryKey = strtolower($categoryEnum->key); 
                 $articles = $this->gnewsClient->fetchTopHeadlines($categoryKey);
-                GnewsTop::storeArticles($articles, $categoryEnum->value); // 👈 pass integer value
+                GnewsTop::storeArticles($articles, $categoryEnum->value);
             }
             return true;
         } catch (\Exception $e) {
