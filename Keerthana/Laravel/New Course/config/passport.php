@@ -43,4 +43,9 @@ return [
 
     'connection' => env('PASSPORT_CONNECTION'),
 
+    'password' =>[
+        'cliendId' => env('PASSPORT_PASSWORD_CLIENT_ID'),
+        'secret' => env('PASSPORT_PASSWORD_SECRET'),
+    ]
+
 ];
