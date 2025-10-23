@@ -3,20 +3,42 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use PhpUnitTesting\Functions;
+use App\PhpUnitTesting\Functions;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 final class FunctionsTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function testaddPositiveintergers(): void
+
+
+    public static function additionProvider(): array
     {
-        $this->assertSame(5, Functions::addIntegers(2,3));
+        return [
+            'two positive integers' => [2, 3, 5],
+            'two negative integers' => [-2, -3, -5],
+            'positive and negative integer' => [3, -2, 1],
+            'adding zero' => [3, 0, 3]
+        ];
     }
 
-    public function testaddNegativeintergers(): void
+    #[DataProvider('additionProvider')]
+    public function testAddIntegers(int $a, int $b, int $expected): void
     {
-        $this->assertSame(-9, Functions::addIntegers(-2,-3));
+        $this->assertSame($expected, Functions::addIntegers($a, $b));
+    }
+
+    
+    // public function testAddPositiveIntergers(): void
+    // {
+    //     $this->assertSame(5, Functions::addIntegers(2,3));
+    // }
+
+    // public function testAddNegativeIntergers(): void
+    // {
+    //     $this->assertSame(-5, Functions::addIntegers(-2,-3));
+    // }
+
+    public function testAddingIsCommutative(): void
+    {
+        $this->assertSame(Functions::addIntegers(3, 2), Functions::addIntegers(2, 3));
     }
 }

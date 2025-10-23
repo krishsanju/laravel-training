@@ -3,7 +3,8 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use PhpUnitTesting\Person;
+use PHPUnit\Framework\Attributes\Test;
+use App\PhpUnitTesting\Person;
 
 
 
@@ -11,11 +12,21 @@ final class PersonTest extends TestCase
 {
     public function testGetFullNameIsFirstNameAndSurname(): void
     {
-        $person = new Person('Teresa', 'Green');
+        $person = new Person();
 
-        // $person->setFirstName('Teresa');
-        // $person->setSurname('Green');
+        $person->setFirstName('Teresa');
+        $person->setSurname('Green');
 
-        $this->assertSame('TeresaGreen', $person->getFullName());
+        $this->assertSame('Teresa Green', $person->getFullName());
+    }
+
+    #[Test]
+    public function fullNameIsfirstNameWhenNoSurname(): void
+    {
+        $person = new Person();
+
+        $person->setFirstName('Keerthana');
+
+        $this->assertSame('Keerthana', $person->getFullName());
     }
 }

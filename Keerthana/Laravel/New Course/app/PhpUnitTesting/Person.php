@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpUnitTesting;
+namespace App\PhpUnitTesting;
 
 class Person
 {
@@ -8,11 +8,6 @@ class Person
 
     private string $surname;
 
-    public function __construct(string $first_name, string $surname)
-    {
-        $this->first_name = $first_name;
-        $this->surname = $surname;
-    }
 
     public function getFirstName(): string
     {
@@ -36,6 +31,6 @@ class Person
     
     public function getFullName(): string
     {
-        return $this->first_name . ' ' . $this->surname;
+        return trim($this->first_name . ' ' . ($this->surname ?? null ));
     }
 }
