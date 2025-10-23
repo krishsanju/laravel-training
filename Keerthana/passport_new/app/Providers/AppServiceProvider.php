@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Laravel\Passport\Passport;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Passport::ignoreRoutes();
-        Passport::enablePasswordGrant();  //to enable the Password Grant flow
+        Passport::enablePasswordGrant();
     }
 }

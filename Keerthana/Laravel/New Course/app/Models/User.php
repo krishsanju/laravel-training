@@ -52,14 +52,14 @@ class User extends Authenticatable implements OAuthenticatable
     }
 
     public static function createUser(array $attributes){
-        $user = self::create($attributes);
-        $token = $user->createToken('auth_token')->accessToken;
+        return self::create($attributes);
+        // $token = $user->createToken('auth_token')->accessToken;
 
-        return (new ApiResponse)
-                ->setMessage('User created see token')
-                ->setToken($token)
-                ->setData($user->toArray())
-                ->returnResponse();
+        // return (new ApiResponse)
+        //         ->setMessage('User created see token')
+        //         ->setToken($token)
+        //         ->setData($user->toArray())
+        //         ->returnResponse();
 
     }
 

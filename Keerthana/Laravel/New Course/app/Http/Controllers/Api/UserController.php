@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Response\ApiResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Response\ApiResponse;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
 use App\Http\Requests\RegisterRequest;
 
 class UserController extends Controller
@@ -15,8 +16,47 @@ class UserController extends Controller
     {
         // dd($request->all());
         $data = $request->all();
+        $data['email_verified_at'] = now();
+        info('okay gotttttttt the dataaaaaaaaaaaa');
 
-        return User::createUser($data);
+        $user = User::createUser($data);
+        info('okay gotttttttt the userrrrrrrrrrrrrrrrrrr');
+
+        $response = Http::asForm()->post(url('/oauth/token'), [
+        'grant_type' => 'authorization_code',
+        'client_id' => config('passport.passport_keys.client_id'),
+        'client_secret' => config('passport.passport_keys.client_secret'),
+        'redirect_uri' => '/',
+        'email' => $request->input('email'), 
+        'password' => $request->input('password'),
+        ]);
+        info($response);
+
+        // $response = Http::post(config('app.url') . '/oauth/token', [
+        //     'grant_type' => 'password',
+        //     'client_id' => config('passport.password.cliendId'),
+        //     'client_secret' => config('passport.password.secret'),
+        //     'username' => $data['email'],
+        //     'password' => $data['password'],
+        //     'scope' => '',
+        // ]);
+        // $user['token'] = $response->json();
+
+        // $tokenResult = $user->createToken('Personal Access Token');
+    
+        // // Optional: format response
+        // $token = [
+        //     'access_token' => $tokenResult->accessToken,
+        //     'token_type' => 'Bearer',
+        //     'expires_at' => $tokenResult->token->expires_at,
+        // ];
+
+        return response()->json([
+            'success' => true,
+            'statusCode' => 201,
+            'message' => 'User has been registered successfully.',
+            'data' => [$user],
+        ], 201);
     }
 
     public function login(LoginRequest $request)
