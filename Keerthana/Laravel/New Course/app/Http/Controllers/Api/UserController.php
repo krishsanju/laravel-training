@@ -22,15 +22,25 @@ class UserController extends Controller
         $user = User::createUser($data);
         info('okay gotttttttt the userrrrrrrrrrrrrrrrrrr');
 
-        $response = Http::post(config('app.url') . '/oauth/token', [
-            'grant_type' => 'password',
-            'client_id' => config('passport.password.cliendId'),
-            'client_secret' => config('passport.password.secret'),
-            'username' => $data['email'],
-            'password' => $data['password'],
-            'scope' => '',
+        $response = Http::asForm()->post(url('/oauth/token'), [
+        'grant_type' => 'authorization_code',
+        'client_id' => config('passport.passport_keys.client_id'),
+        'client_secret' => config('passport.passport_keys.client_secret'),
+        'redirect_uri' => '/',
+        'email' => $request->input('email'), 
+        'password' => $request->input('password'),
         ]);
-        $user['token'] = $response->json();
+        info($response);
+
+        // $response = Http::post(config('app.url') . '/oauth/token', [
+        //     'grant_type' => 'password',
+        //     'client_id' => config('passport.password.cliendId'),
+        //     'client_secret' => config('passport.password.secret'),
+        //     'username' => $data['email'],
+        //     'password' => $data['password'],
+        //     'scope' => '',
+        // ]);
+        // $user['token'] = $response->json();
 
         // $tokenResult = $user->createToken('Personal Access Token');
     
