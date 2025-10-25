@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'currency_exchange' => [
+        'api_key' => env('EXCHANGE_API_KEY'),
+        'api_base_url' => env('EXCHANGE_API_BASE_URL'),
+    ]
+
 ];
