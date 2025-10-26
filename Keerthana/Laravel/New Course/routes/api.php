@@ -8,4 +8,7 @@ Route::prefix('rates')->group(function () {
     Route::get('/', [ExchangeRateController::class, 'getRate']);
     // Route::get('/base', [ExchangeRateController::class, 'getRatesByBase']);
     Route::get('/convert', [ExchangeRateController::class, 'convert']);
+    Route::post('/convert/save', [ExchangeRateController::class, 'saveFavourite']);
+    Route::get('/history', [ExchangeRateController::class, 'getHistoricalRates']);
+
 });
