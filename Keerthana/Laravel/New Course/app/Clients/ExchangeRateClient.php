@@ -30,6 +30,8 @@ class ExchangeRateClient
             if ($response->failed()) {
                 throw new \Exception('API request failed');
             }
+            info('IN CLIENT');
+            info($response->json());
     
             return $response->json();
         } catch (\Exception $e) {

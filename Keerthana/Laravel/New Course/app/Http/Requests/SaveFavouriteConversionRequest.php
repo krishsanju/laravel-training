@@ -22,7 +22,11 @@ class SaveFavouriteConversionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'user_id' => 'required|integer|exists:users,id',
+            'query.from' => 'required|string|size:3',
+            'query.to' => 'required|string|size:3',
+            'query.amount' => 'required|numeric|min:0.01',
+            'result' => 'required|numeric',
         ];
     }
 }

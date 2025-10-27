@@ -15,10 +15,14 @@ use App\Http\Requests\SaveFavouriteConversionRequest;
 
 class ExchangeRateController extends Controller
 {
-    protected $client;
-    public function __construct(ExchangeRateClient $client)
+    protected ExchangeRateClient $client;
+    protected User $userModel;
+    protected FavouriteConversion $favouriteConversion;
+    public function __construct(ExchangeRateClient $client, User $userModel, FavouriteConversion $favouriteConversion)
     {
         $this->client = $client;
+        $this->userModel = $userModel;
+        $this->favouriteConversion = $favouriteConversion;
     }
 
     public function getRate(Request $request)
@@ -34,7 +38,7 @@ class ExchangeRateController extends Controller
         }
 
         return ApiResponse::setMessage('Live exchange rate fetched successfully.')
-            ->mergeResults(['exchange_rate' => $data])
+            ->mergeResults(['results' => ['query' => $data['query'], 'result' => $data['result']]])
             ->response(Response::HTTP_OK);
     }
 
@@ -51,16 +55,16 @@ class ExchangeRateController extends Controller
         }
 
         return ApiResponse::setMessage('Currency conversion successful.')
-                        ->mergeResults(['conversion' => $data])
+                        ->mergeResults(["results" => ['query' => $data['query'], 'result' => $data['result']]])
                         ->response(Response::HTTP_OK);       
     }
 
 
-    public function saveFavourite(ConvertCurrencyRequest  $request)
+    public function saveFavourite(SaveFavouriteConversionRequest  $request)
     {
 
-        $user = User::whereId($request->input('user_id'))->first();
-        $favourite = FavouriteConversion::saveConvertion($user, $request);
+        $user = $this->userModel->whereId($request->input('user_id'))->first();
+        $favourite = $this->favouriteConversion->saveConvertion($user, $request);
 
         return ApiResponse::setMessage('Favourite conversion saved successfully.')
                           ->mergeResults(['favourite' => $favourite])
@@ -80,7 +84,7 @@ class ExchangeRateController extends Controller
         $currentStart = $startDate->copy();
 
         while ($currentStart->lte($endDate)) {
-            $currentEnd = $currentStart->copy()->addDays(364);
+            $currentEnd = $currentStart->copy()->addDays(365);
             if ($currentEnd->gt($endDate)) {
                 $currentEnd = $endDate->copy();
             }
@@ -118,5 +122,7 @@ class ExchangeRateController extends Controller
                         ])
                         ->response(Response::HTTP_OK);
     }
+
+    
 
 }

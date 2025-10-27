@@ -26,10 +26,10 @@ class FavouriteConversion extends Model
     {
         return self::create([
             'user_id'       => $user->id,
-            'from_currency' => strtoupper($request->input('from')),
-            'to_currency'   => strtoupper($request->input('to')),
-            'amount'           => $request->input('amount'),
-            'converted_amount' => $request->input('result'),
+            'from_currency' => strtoupper($request['query']['from']),
+            'to_currency'   => strtoupper($request['query']['to']),
+            'amount'           => $request['query']['amount'],
+            'converted_amount' => $request['result'],
         ]);
     }
 }

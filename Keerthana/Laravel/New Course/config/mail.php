@@ -115,4 +115,10 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'to' => explode(',', env('REPORT_MAIL_TO', 'kksfeb24@gmail.com')),
+
+
+    'currencies' => [
+        'INR', 'GBP', 'EUR', 'JPY', 'JOD', 'OMR', 'AUD', 'NZD',
+    ]
 ];
