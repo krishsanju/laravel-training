@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use App\Clients\ExchangeRateClient;
 use App\Http\Responses\ApiResponse;
 use App\Models\FavouriteConversion;
+use App\Actions\GetQuarterlyExchangeRates;
 use App\Http\Requests\ConvertCurrencyRequest;
 use App\Http\Requests\HistoricalRatesRequest;
 use App\Http\Requests\SaveFavouriteConversionRequest;
@@ -79,48 +80,16 @@ class ExchangeRateController extends Controller
         $startDate   = Carbon::parse($request->input('start_date'));
         $endDate     = Carbon::parse($request->input('end_date'));
 
-        $allQuotes = [];
+        $result = GetQuarterlyExchangeRates::run($source, $currencies, $startDate, $endDate);
 
-        $currentStart = $startDate->copy();
-
-        while ($currentStart->lte($endDate)) {
-            $currentEnd = $currentStart->copy()->addDays(365);
-            if ($currentEnd->gt($endDate)) {
-                $currentEnd = $endDate->copy();
-            }
-
-            $data = $this->client->getHistoricalRates(
-                $source,
-                $currencies,
-                $currentStart->toDateString(),
-                $currentEnd->toDateString()
-            );
-
-            if (!$data || !isset($data['success']) || $data['success'] !== true || empty($data['quotes'])) {
-                return ApiResponse::setMessage('Failed to fetch historical exchange rates.')
-                                ->response(Response::HTTP_BAD_GATEWAY);
-            }
-
-            foreach ($data['quotes'] as $date => $dayQuotes) {
-                foreach ($dayQuotes as $pair => $rate) {
-                    $targetCurrency = str_replace($data['source'], '', $pair);
-                    $allQuotes[$targetCurrency][$date] = $rate;
-                }
-            }
-
-
-            $currentStart = $currentEnd->addDay();
+        if($result['status'] == false)
+        {
+            return $result;
         }
 
-        return ApiResponse::setMessage('Historical exchange rates fetched successfully.')
-                        ->mergeResults([
-                            'source' => $source,
-                            'currencies' => explode(',', $currencies),
-                            'start_date' => $startDate->toDateString(),
-                            'end_date' => $endDate->toDateString(),
-                            'quotes' => $allQuotes,
-                        ])
-                        ->response(Response::HTTP_OK);
+        return ApiResponse::setMessage('Quarterly exchange rate averages fetched successfully.')
+                    ->mergeResults($result)
+                    ->response(Response::HTTP_OK);
     }
 
     
