@@ -7,9 +7,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/LOGGEDIN', function(){
+Route::get('/logged-in', function(){
     return "LOGGEDIN";
-});
+})->name('loggedIn');
 
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);

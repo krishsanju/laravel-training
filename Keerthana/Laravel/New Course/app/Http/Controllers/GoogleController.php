@@ -16,14 +16,14 @@ class GoogleController extends Controller
 
     public function handleGoogleCallback()
     {
-        try{
-            $user = Socialite::driver('google')->user();
+        // try{
+            $user = Socialite::driver('google')->stateless()->user();
+            info(json_encode($user));
 
             $findUser = User::where('google_id', $user->getId())->first();
 
             if($findUser){
                 Auth::login($findUser);
-                return redirect()->intended('/LOGGEDIN');
             }else{
                 $newUser = User::create([
                     'name' => $user->getName(),
@@ -33,12 +33,12 @@ class GoogleController extends Controller
                 ]);
 
                 Auth::login($newUser);
-                return redirect()->intended('/LOGGEDIN');
             }
+            return redirect()->route('loggedIn');
             
-        }catch(\Exception $e){
-            return redirect('/login')->with('error', "Google login failed");
-        }
+        // }catch(\Exception $e){
+        //     return redirect('/login')->with('error', "Google login failed");
+        // }
     }
 
     public function logout()
