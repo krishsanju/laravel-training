@@ -35,7 +35,7 @@ class ExchangeRateClient
     
             return $response->json();
         } catch (\Exception $e) {
-            Log::error('Currency conversion failed', ['error' => $e->getMessage()]);
+            // Log::error('Currency conversion failed', ['error' => $e->getMessage()]);
             return null;
         }
     }
@@ -57,7 +57,7 @@ class ExchangeRateClient
             return $response->json();
 
         } catch (\Exception $e) {
-            Log::error('Historical data fetch failed', ['error' => $e->getMessage(), 'start'=>$startDate, 'end'=>$endDate]);
+            // Log::error('Historical data fetch failed', ['error' => $e->getMessage(), 'start'=>$startDate, 'end'=>$endDate]);
             abort(500,'Historical data fetch failed');
         }
     }

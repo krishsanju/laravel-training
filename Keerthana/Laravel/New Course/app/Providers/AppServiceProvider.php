@@ -12,7 +12,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(ExchangeRateClient::class, fn() => new ExchangeRateClient());
+        // $this->app->singleton(ExchangeRateClient::class, fn() => new ExchangeRateClient());
+        $this->app->singleton('exchange-rate-client', function ($app){
+            return new  ExchangeRateClient();
+        });
     }
 
     /**

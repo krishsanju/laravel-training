@@ -14,6 +14,8 @@ use App\Http\Requests\ConvertCurrencyRequest;
 use App\Http\Requests\HistoricalRatesRequest;
 use App\Http\Requests\SaveFavouriteConversionRequest;
 
+use App\Facades\ExchangeRateFacade as ExchangeRate;
+
 class ExchangeRateController extends Controller
 {
     protected ExchangeRateClient $client;
@@ -31,7 +33,8 @@ class ExchangeRateController extends Controller
         $from = $request->query('from');
         $to = $request->query('to');
 
-        $data = $this->client->getLiveRate($from, $to);
+        // $data = $this->client->getLiveRate($from, $to);
+        $data = ExchangeRate::getLiveRate($from, $to);
 
         if (!$data) {
             return ApiResponse::setMessage('Failed to fetch exchange rate.')
@@ -48,7 +51,8 @@ class ExchangeRateController extends Controller
         $to     = $request->input('to');
         $amount = $request->input('amount', 1.0);
 
-        $data = $this->client->getLiveRate($from, $to, (float) $amount);
+        // $data = $this->client->getLiveRate($from, $to, (float) $amount);
+        $data = ExchangeRate::getLiveRate($from, $to, (float) $amount);
 
         if (!$data) {
             return ApiResponse::setMessage('Failed to perform currency conversion.')
