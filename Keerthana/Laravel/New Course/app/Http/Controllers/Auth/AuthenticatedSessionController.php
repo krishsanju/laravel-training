@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -33,9 +34,11 @@ class AuthenticatedSessionController extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
+        
         $user->tokens()->delete();
         $token = $user->createToken('api_token')->plainTextToken;
-
+        
+        $activity  = UserActivity::incrementLogin($user);
         return response()->json([
             'user' => $user,
             'token' => $token,

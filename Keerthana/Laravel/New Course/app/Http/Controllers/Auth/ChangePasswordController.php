@@ -8,6 +8,7 @@ use App\Http\Responses\ApiResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\ChangePasswordRequest;
+use App\Models\UserActivity;
 
 class ChangePasswordController extends Controller
 {
@@ -23,6 +24,8 @@ class ChangePasswordController extends Controller
         }
 
         User::updatePassword($user, $request->password);
+
+        $activity  = UserActivity::incrementPasswordChange($user);
         return $this->apiResponse->setMessage("Password updated successfully")
                             ->response(Response::HTTP_OK);
     }

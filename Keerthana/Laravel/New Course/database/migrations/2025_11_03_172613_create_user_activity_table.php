@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('user_activity', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->date('activity_date')->default(now());
+            $table->unsignedInteger('login_attempts')->default(0);
+            $table->unsignedInteger('password_changes')->default(0);
+            $table->unsignedInteger('email_changes')->default(0);
+            $table->boolean('is_fraud')->default(false);
             $table->timestamps();
         });
     }
