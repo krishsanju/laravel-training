@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ActivityType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +15,8 @@ return new class extends Migration
         Schema::create('user_activity', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->date('activity_date')->default(now());
-            $table->unsignedInteger('login_attempts')->default(0);
-            $table->unsignedInteger('password_changes')->default(0);
-            $table->unsignedInteger('email_changes')->default(0);
-            $table->boolean('is_fraud')->default(false);
+            $table->date('activity_date');
+            $table->string('activity_type');
             $table->timestamps();
         });
     }

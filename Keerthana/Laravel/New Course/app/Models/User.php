@@ -52,4 +52,9 @@ class User extends Authenticatable
             'password' => $updatedPassword,
         ]);
     }
+
+    public function userActivities()
+    {
+        return $this->hasMany(UserActivity::class);
+    }
 }

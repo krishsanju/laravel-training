@@ -12,23 +12,20 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
-{
+{    protected $user;
+    protected $userActivity;
+
+    public function __construct(User $user, UserActivity $userActivity)
+    {
+        $this->user = $user;
+        // $this->userActivity = $userActivity;
+    }
+
     /**
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request)
-    {
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-
-        // return response()->noContent();
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
+    {   $user = $this->user->where('email', $request->email)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
@@ -38,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         $user->tokens()->delete();
         $token = $user->createToken('api_token')->plainTextToken;
         
-        $activity  = UserActivity::incrementLogin($user);
+        $user->userActivities()->getRelated()->incrementLogin($user);
         return response()->json([
             'user' => $user,
             'token' => $token,
@@ -49,16 +46,7 @@ class AuthenticatedSessionController extends Controller
      * Destroy an authenticated session.
      */
     public function destroy(Request $request)
-    {
-        // Auth::guard('web')->logout();
-
-        // $request->session()->invalidate();
-
-        // $request->session()->regenerateToken();
-
-        // return response()->noContent();
-
-        $request->user()->currentAccessToken()->delete();
+    {   $request->user()->currentAccessToken()->delete();
     
         return response()->json([
             // 'user'=> $request->user(),

@@ -25,7 +25,7 @@ class ChangePasswordController extends Controller
 
         User::updatePassword($user, $request->password);
 
-        $activity  = UserActivity::incrementPasswordChange($user);
+        $user->userActivities()->getRelated()->incrementPasswordChange($user);
         return $this->apiResponse->setMessage("Password updated successfully")
                             ->response(Response::HTTP_OK);
     }
