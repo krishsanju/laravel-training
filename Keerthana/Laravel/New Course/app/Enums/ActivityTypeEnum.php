@@ -24,6 +24,10 @@ final class ActivityTypeEnum extends Enum
         };
     }
 
-    
-
+    public static function keyAsdescription(mixed $value)
+    {
+        return match($value){
+            self::Login => ''
+        }
+    }
 }
