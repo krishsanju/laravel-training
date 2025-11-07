@@ -8,7 +8,7 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class ActivityType extends Enum
+final class ActivityTypeEnum extends Enum
 {
     const Login = 0;
     const PasswordChange = 1;
@@ -20,8 +20,10 @@ final class ActivityType extends Enum
             self::Login => 'User login found',
             self::PasswordChange => 'User changed password',
             self::EmailChange => 'User changed email',
-            default => 'Unknown activity type',
+            // default => 'Unknown activity type',
         };
     }
+
+    
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\ActivityType;
+use App\Enums\ActivityTypeEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,13 +13,8 @@ class UserActivity extends Model
     protected $table = 'user_activity';
     protected $fillable = [
         'user_id',
-        'login_attempts',
-        'password_changes',
-        'email_changes',
-        'is_fraud',
-        'activity_date',
         'activity_type',
-        'count',
+        'data',
     ];
 
     protected function casts(): array
@@ -38,36 +33,41 @@ class UserActivity extends Model
     {
         $today = today()->toDateString();
 
-        $loginAttempts = self::getActivityCount($user, ActivityType::Login, $today);
-        $passwordChanges = self::getActivityCount($user, ActivityType::PasswordChange, $today);
+        $loginAttempts = self::getActivityCount($user, ActivityTypeEnum::Login, $today);
+        $passwordChanges = self::getActivityCount($user, ActivityTypeEnum::PasswordChange, $today);
 
-        return ($loginAttempts > 1 || $passwordChanges >3);
+        return ($loginAttempts > 5 || $passwordChanges > 3);
     }
 
-    private static function getActivityCount(User $user, $activityType, string $date)
+    private static function getActivityCount(User $user, $activityTypeEnum, string $date)
     {
+        $enumKey = ActivityTypeEnum::getKey($activityTypeEnum);
+
         return $user->userActivities()
                 ->whereDate('created_at', '=', $date)
-                ->where('activity_type', ActivityType::getDescription($activityType))
+                ->where('activity_type', $enumKey)
                 ->count();
+
+        // return $user->userActivities()->isToday()->withEventType($ActivityTypeEnum)->count(0);
     }
 
     public function incrementLogin(User $user)
     {
-        return $this->incrementActivity($user, ActivityType::Login);
+        return $this->incrementActivity($user, ActivityTypeEnum::Login);
     }
 
     public function incrementPasswordChange(User $user)
     {
-        return $this->incrementActivity($user, ActivityType::PasswordChange);
+        return $this->incrementActivity($user, ActivityTypeEnum::PasswordChange);
     }
 
-    protected static function incrementActivity(User $user, $activityType)
+    protected static function incrementActivity(User $user, $activityTypeEnum)
     {
-        $typeString = ActivityType::getDescription($activityType);
+        $typeKey = ActivityTypeEnum::getKey($activityTypeEnum);
+        $typeDescription = ActivityTypeEnum::getDescription($activityTypeEnum);
         $activity = $user->userActivities()->create([
-                'activity_date' => today()->toDateString(),
-                'activity_type' => $typeString,
+                'activity_type' => $typeKey,
+                'data' => $typeDescription,
             ]);
 
         return $activity;
