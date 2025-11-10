@@ -22,15 +22,15 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        if (!$user) {
-            return ApiResponse::setMessage('Unauthenticated')
-                ->response(Response::HTTP_UNAUTHORIZED);
-        }
+        // if (!$user) {
+        //     return ApiResponse::setMessage('Unauthenticated')
+        //         ->response(Response::HTTP_UNAUTHORIZED);
+        // }
         $user = $this->userService->getProfile($user->id);
         // info($user);
         return ApiResponse::setMessage('Profile fetched successfully')
-                ->setData($user)
-                ->response(Response::HTTP_OK);
+            ->setData($user)
+            ->response(Response::HTTP_OK);
     }
 
     public function update(UpdateProfileRequest $request)
@@ -43,8 +43,8 @@ class ProfileController extends Controller
 
         $updatedUser = $this->userService->updateProfile($user->id, $request->validated());
         return ApiResponse::setData($updatedUser)
-                ->setMessage('Profile updated successfully')
-                ->response(Response::HTTP_OK);
+            ->setMessage('Profile updated successfully')
+            ->response(Response::HTTP_OK);
     }
 
     public function destroy(Request $request)
@@ -57,21 +57,19 @@ class ProfileController extends Controller
         }
         $this->userService->deleteAccount($user->id);
         return ApiResponse::setMessage('Account deleted successfully')
-                ->response(Response::HTTP_OK);
+            ->response(Response::HTTP_OK);
     }
 
     public function activity(Request $request)
     {
-        $userId = $request->id;
-        info($userId);
-
-        if (!auth()->id()) {
-            return ApiResponse::setMessage('Unauthenticated')
-                ->response(Response::HTTP_UNAUTHORIZED);
-        }
+        $userId = auth()->id();
+        // if (!auth()->id()) {
+        //     return ApiResponse::setMessage('Unauthenticated')
+        //         ->response(Response::HTTP_UNAUTHORIZED);
+        // }
         $logs = $this->userService->getActivityLogs($userId);
         return ApiResponse::setData($logs)
-                ->setMessage('Activity logs fetched')
-                ->response(Response::HTTP_OK);
+            ->setMessage('Activity logs fetched')
+            ->response(Response::HTTP_OK);
     }
 }

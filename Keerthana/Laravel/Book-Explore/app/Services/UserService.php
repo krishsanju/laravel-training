@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Mail\UserBlockedMail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Contracts\UserRepositoryInterface;
 
 class UserService
@@ -33,7 +35,7 @@ class UserService
         return $user->fresh();
     }
 
-        public function deleteAccount(int $userId)
+    public function deleteAccount(int $userId)
     {
         $user = User::findOrFail($userId);
 
@@ -49,4 +51,31 @@ class UserService
         return $this->logService->getLogsForUser($userId);
     }
 
+    public function getAllActivityLogs()
+    {
+        return $this->logService->getAllLogs();
+    }
+
+    public function blockUser(int $userId)
+    {
+        $user = User::find($userId);
+
+        if (!$user) {
+            throw new \Exception('User not found');
+        }
+
+        if ($user->is_blocked) {
+            return $user; // already blocked
+        }
+
+        $user->update([
+            'is_blocked' => true,
+        ]);
+
+        Mail::to($user->email)->send(new UserBlockedMail($user));
+
+        $this->logService->log($userId, 'account_blocked', 'User is blocked');
+
+        return $user;
+    }
 }

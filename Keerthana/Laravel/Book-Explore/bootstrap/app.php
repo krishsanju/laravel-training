@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckIfUserBlocked;
 use Illuminate\Foundation\Application;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role'             => RoleMiddleware::class,
             'permission'       => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
+            'not_blocked' => CheckIfUserBlocked::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

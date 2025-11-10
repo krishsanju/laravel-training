@@ -29,19 +29,21 @@ Route::middleware(['auth:api'])->group(function () {
 
 
 //
-// Route::middleware(['auth:api', 'check.blocked'])->group(function () {
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'not_blocked'])->group(function () {
+// Route::middleware(['auth:api'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::delete('/profile', [ProfileController::class, 'destroy']);
+    Route::get('/profile/activity', [ProfileController::class, 'activity']);
 });
 
 Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::get('/admin/users', [AdminController::class, 'users']);
-    Route::get('/profile/activity', [ProfileController::class, 'activity']);
     Route::get('/all-favorites', [AdminController::class, 'getAllFavorites']);
     // Route::delete('/admin/users/{idToDelete}', [AdminController::class, 'destroy']);
+    Route::get('/view-activity', [AdminController::class, 'activity']);
     Route::delete('/remove-review-by-admin', [AdminController::class, 'remove']);
+    Route::put('/block-user', [AdminController::class, 'blockUser']);
 
 });
 

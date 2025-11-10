@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Response\ApiResponse;
+use App\Services\UserService;
 use Illuminate\Http\Response;
 use App\Services\ReviewService;
 use App\Services\FavoriteService;
@@ -13,11 +14,13 @@ class AdminController extends Controller
 {
     protected FavoriteService $favoriteService;
     protected ReviewService $reviewService;
+    protected UserService $userService;
 
-    public function __construct(FavoriteService $favoriteService, ReviewService $reviewService)
+    public function __construct(FavoriteService $favoriteService, ReviewService $reviewService, UserService $userService)
     {
         $this->favoriteService = $favoriteService;
         $this->reviewService = $reviewService;
+        $this->userService = $userService;
     }
     public function users()
     {
@@ -75,6 +78,34 @@ class AdminController extends Controller
         }
 
         return ApiResponse::setMessage('Review removed')
+            ->response(Response::HTTP_OK);
+    }
+
+    public function activity(Request $request)
+    {
+        if ($request->query('id')) {
+            $userId = $request->query('id');
+            $logs = $this->userService->getActivityLogs($userId);
+        } else {
+            $logs = $this->userService->getAllActivityLogs();
+        }
+        return ApiResponse::setMessage('Activity logs fetched')
+            ->setData($logs)
+            ->response(Response::HTTP_OK);
+    }
+
+    public function blockUser(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+        ]);
+
+        $userId = $request->user_id;
+        $user = $this->userService->blockUser($userId);
+        info($user);
+
+        return ApiResponse::setMessage('User is blocked')
+            ->setData($user)
             ->response(Response::HTTP_OK);
     }
 }

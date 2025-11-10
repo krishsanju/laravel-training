@@ -19,7 +19,7 @@ class ReviewController extends Controller
     public function add(ReviewRequest $request)
     {
         info('review added ');
-        $userId = auth()->id();  //when we give bearer token we get the user details
+        $userId = auth()->id();
         $result = $this->reviewService->addReview($userId, $request);
 
         if (!$result) {
