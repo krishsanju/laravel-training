@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Response\ApiResponse;
 use App\Services\UserService;
 use Illuminate\Http\Response;
+use App\Services\ExportService;
 use App\Services\ReviewService;
 use App\Services\FavoriteService;
 
@@ -16,7 +17,7 @@ class AdminController extends Controller
     protected ReviewService $reviewService;
     protected UserService $userService;
 
-    public function __construct(FavoriteService $favoriteService, ReviewService $reviewService, UserService $userService)
+    public function __construct(FavoriteService $favoriteService, ReviewService $reviewService, UserService $userService, private ExportService $exportService)
     {
         $this->favoriteService = $favoriteService;
         $this->reviewService = $reviewService;
@@ -107,5 +108,10 @@ class AdminController extends Controller
         return ApiResponse::setMessage('User is blocked')
             ->setData($user)
             ->response(Response::HTTP_OK);
+    }
+
+    public function exportUsersFavoritesCsv()
+    {
+        return $this->exportService->exportUsersFavoritesCsv();
     }
 }

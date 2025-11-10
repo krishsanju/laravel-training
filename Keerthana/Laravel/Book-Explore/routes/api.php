@@ -44,7 +44,7 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::get('/view-activity', [AdminController::class, 'activity']);
     Route::delete('/remove-review-by-admin', [AdminController::class, 'remove']);
     Route::put('/block-user', [AdminController::class, 'blockUser']);
-
+    Route::get('/reports/users-favorites-csv', [AdminController::class, 'exportUsersFavoritesCsv']);
 });
 
 
