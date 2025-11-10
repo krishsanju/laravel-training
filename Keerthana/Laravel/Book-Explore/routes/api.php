@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\FavoriteController;
@@ -27,6 +28,7 @@ Route::middleware(['auth:api'])->group(function () {
 });
 
 
+//
 // Route::middleware(['auth:api', 'check.blocked'])->group(function () {
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
@@ -39,17 +41,27 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::get('/profile/activity', [ProfileController::class, 'activity']);
     Route::get('/all-favorites', [AdminController::class, 'getAllFavorites']);
     // Route::delete('/admin/users/{idToDelete}', [AdminController::class, 'destroy']);
+    Route::delete('/remove-review-by-admin', [AdminController::class, 'remove']);
+
 });
 
 
+//BOOKS
 Route::get('/books/search', [BookController::class, 'search']);
 Route::get('/books/{id}', [BookController::class, 'show']);
 Route::post('/books', [BookController::class, 'store']);
 
 
+//FAVORITES
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('/add-favorites', [FavoriteController::class, 'add']);
+    Route::delete('/remove-favorites', [FavoriteController::class, 'remove']);
+    Route::get('/view-favorites', [FavoriteController::class, 'list']);
+});
 
-Route::middleware('auth:api')->group(function () {
-    Route::post('/favorites', [FavoriteController::class, 'add']);
-    Route::delete('/favorites', [FavoriteController::class, 'remove']);
-    Route::get('/favorites', [FavoriteController::class, 'list']);
+//REVIEWS
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('/add-review', [ReviewController::class, 'add']);
+    Route::delete('/remove-review', [ReviewController::class, 'remove']);
+    // Route::get('/view-review', [ReviewController::class, 'list']);
 });

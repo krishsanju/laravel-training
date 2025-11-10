@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Review extends Model
 {
-    use  SoftDeletes;
+    // use  SoftDeletes;
 
     protected $fillable = [
         'user_id',
