@@ -27,7 +27,7 @@ class ProfileController extends Controller
                 ->response(Response::HTTP_UNAUTHORIZED);
         }
         $user = $this->userService->getProfile($user->id);
-        info($user);
+        // info($user);
         return ApiResponse::setMessage('Profile fetched successfully')
                 ->setData($user)
                 ->response(Response::HTTP_OK);
@@ -62,13 +62,14 @@ class ProfileController extends Controller
 
     public function activity(Request $request)
     {
-        $user = $request->user();
+        $userId = $request->id;
+        info($userId);
 
-        if (!$user) {
+        if (!auth()->id()) {
             return ApiResponse::setMessage('Unauthenticated')
                 ->response(Response::HTTP_UNAUTHORIZED);
         }
-        $logs = $this->userService->getActivityLogs($user->id);
+        $logs = $this->userService->getActivityLogs($userId);
         return ApiResponse::setData($logs)
                 ->setMessage('Activity logs fetched')
                 ->response(Response::HTTP_OK);

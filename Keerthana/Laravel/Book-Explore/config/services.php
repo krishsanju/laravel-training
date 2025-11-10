@@ -34,5 +34,8 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'open_library'=>[
+        'base_url' => env('OPEN_LIBRARY_BASE_URL'),
+    ],
 
 ];

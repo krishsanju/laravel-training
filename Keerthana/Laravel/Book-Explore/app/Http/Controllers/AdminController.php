@@ -6,9 +6,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Response\ApiResponse;
 use Illuminate\Http\Response;
+use App\Services\FavoriteService;
 
 class AdminController extends Controller
 {
+    protected FavoriteService $favoriteService;
+
+    public function __construct(FavoriteService $favoriteService)
+    {
+        $this->favoriteService = $favoriteService;
+    }
     public function users()
     {
         $users = User::all();
@@ -40,4 +47,13 @@ class AdminController extends Controller
     //         ->response(Response::HTTP_OK);
 
     // }
+
+    public function getAllFavorites()
+    {
+        $favorites = $this->favoriteService->getAllFavorites();
+
+        return ApiResponse::setMessage('All users favorite books')
+            ->setData($favorites)
+            ->response(Response::HTTP_OK);
+    }
 }

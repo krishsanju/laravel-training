@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Book;
+use App\Models\Favorite;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -63,7 +65,18 @@ class User extends Authenticatable implements OAuthenticatable
     }
 
     public function actionLogs()
-{
-    return $this->hasMany(ActionLog::class);
-}
+    {
+        return $this->hasMany(ActionLog::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+
+    public function favoriteBooks()
+    {
+        return $this->belongsToMany(Book::class, 'favorites');
+    }
 }

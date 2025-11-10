@@ -70,7 +70,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->assignRole('user');
+        $user->assignRole('admin');
 
         return $this->issueToken($request->email, $request->password);
     }
