@@ -4,6 +4,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\ReviewRepository;
+use App\Exceptions\ResourceNotFoundException;
+use App\Exceptions\ReviewAlreadyExistsException;
 
 class ReviewService
 {
@@ -17,17 +19,19 @@ class ReviewService
     public function addReview(int $userId, $data)
     {
         if ($this->reviewRepo->exists($userId, $data['book_id'])) {
-            return false;
+            throw new ReviewAlreadyExistsException();
         }
 
-        $favorite = $this->reviewRepo->addReview($userId, $data);
-
-        return $favorite;
+        return $this->reviewRepo->addReview($userId, $data);
     }
 
-    public function removeReview(int $userId, int $bookId): bool
+    public function removeReview(int $userId, int $bookId)
     {
-        return $this->reviewRepo->removeReview($userId, $bookId);
+        $removed = $this->reviewRepo->removeReview($userId, $bookId);
+
+        if (!$removed) {
+            throw new ResourceNotFoundException('Review');
+        }
     }
 
     // public function listFavorites(int $userId)

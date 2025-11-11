@@ -3,25 +3,24 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
+use App\Exceptions\ExportFailedException;
 
 class ExportService
 {
     public function exportUsersFavoritesCsv()
     {
-        $fileName = 'users_favorites_report.csv';
+        try {
+            $fileName = 'users_favorites_report_' . date('Y_m_d_H_i_s') . '.csv';
+            $filePath = storage_path("app/public/reports/$fileName");
 
-        $users = User::withCount('favorites')->get();
+            if (!file_exists(dirname($filePath))) {
+                mkdir(dirname($filePath), 0777, true);
+            }
 
-        $headers = [
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
-        ];
+            $users = User::withCount('favorites')->get();
 
-        $callback = function() use ($users) {
-            $file = fopen('php://output', 'w');
+            $file = fopen($filePath, 'w');
 
             fputcsv($file, ['User ID', 'Name', 'Email', 'Favorite Count']);
 
@@ -35,8 +34,11 @@ class ExportService
             }
 
             fclose($file);
-        };
 
-        return response()->stream($callback, 200, $headers);
+            return response()->download($filePath, $fileName)->deleteFileAfterSend(false);
+        } catch (\Throwable $e) {
+            Log::error('CSV export failed', ['error' => $e->getMessage()]);
+            throw new ExportFailedException('Failed to export favorites CSV.');
+        }
     }
 }

@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Auth\RegisterRequest;
 use Nyholm\Psr7Server\ServerRequestCreator;
 use Psr\Http\Message\ServerRequestInterface;
-// use Symfony\Component\HttpFoundation\Response;
-use Nyholm\Psr7\Response;
+use Symfony\Component\HttpFoundation\Response;
+// use Nyholm\Psr7\Response;
 use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
@@ -39,69 +39,57 @@ class AuthController extends Controller
     }
 
 
-//REGISTER
+    //REGISTER
     public function register(RegisterRequest $request)
     {
+        $data = $this->authService->register($request->all());
+        $token = json_decode($data[1]->getContent(), true);
+        $response =  [
+            'user' => $data[0],
+            'token' => $token
+        ];
 
-
-        // $data = $this->authService->register($request->validated());
-
-        // return ApiResponse::setMessage('Registration successful')
-        //     ->setData($data)
-        //     ->response(Response::HTTP_CREATED);
-
-
-            
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $user->assignRole('admin');
-
-        return $this->issueToken($request->email, $request->password);
+        return ApiResponse::setMessage('Registration successful.')
+            ->setData($response)
+            ->response(201);
     }
 
-//LOGIN
+    //LOGIN
     public function login(LoginRequest $request)
     {
-        // $data = $this->authService->login($request->validated());
+        $data = $this->authService->login($request->validated());
+        $token = json_decode($data[1]->getContent(), true);
+        $response =  [
+            'user' => $data[0],
+            'token' => $token
+        ];
+
+        return ApiResponse::setMessage('Login successful.')
+            ->setData($response)
+            ->response(Response::HTTP_OK);
 
         // return ApiResponse::setData($data)
         //     ->setMessage('Login successful')
         //     ->response(Response::HTTP_OK);
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'required|email',
+        //     'password' => 'required|string',
+        // ]);
 
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()], 422);
+        // }
 
 
-        // use typical auth attempt
-        if (!Auth::guard('web')->attempt($request->only('email', 'password'))) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
-        }
+        // // use typical auth attempt
+        // if (!Auth::guard('web')->attempt($request->only('email', 'password'))) {
+        //     return response()->json(['error' => 'Invalid credentials'], 401);
+        // }
 
 
-        return $this->issueToken($request->email, $request->password);
+        // return $this->issueToken($request->email, $request->password);
     }
 
     /**
@@ -156,7 +144,7 @@ class AuthController extends Controller
         return $psrResponse;
     }
 
-//REFRESH TOKEN
+    //REFRESH TOKEN
     public function refreshToken(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -199,7 +187,7 @@ class AuthController extends Controller
     }
 
 
-//LOGOUT
+    //LOGOUT
     public function logout(Request $request)
     {
         // $validator = Validator::make($request->all(), [
@@ -209,7 +197,7 @@ class AuthController extends Controller
         //     return response()->json(['errors' => $validator->errors()], 422);
         // }
 
-        
+
         // $this->authService->logout($request->user());
 
         // return ApiResponse::setMessage('Logged out successfully')

@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
-use App\Repositories\FavoritesRepository;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\FavoritesRepository;
+use App\Exceptions\ResourceNotFoundException;
+use App\Exceptions\FavoriteAlreadyExistsException;
 
 class FavoriteService
 {
@@ -18,7 +20,7 @@ class FavoriteService
     public function addFavorite(int $userId, int $bookId): Favorite|bool
     {
         if ($this->favoritesRepo->exists($userId, $bookId)) {
-            return false;
+            throw new FavoriteAlreadyExistsException();
         }
 
         $favorite = $this->favoritesRepo->addFavorite($userId, $bookId);
@@ -26,9 +28,13 @@ class FavoriteService
         return $favorite;
     }
 
-    public function removeFavorite(int $userId, int $bookId): bool
+    public function removeFavorite(int $userId, int $bookId)
     {
-        return $this->favoritesRepo->removeFavorite($userId, $bookId);
+        $removed = $this->favoritesRepo->removeFavorite($userId, $bookId);
+
+        if (!$removed) {
+            throw new ResourceNotFoundException('Favorite book');
+        }
     }
 
     public function listFavorites(int $userId)

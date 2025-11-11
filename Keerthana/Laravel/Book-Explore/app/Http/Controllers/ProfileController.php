@@ -21,11 +21,7 @@ class ProfileController extends Controller
     public function show(Request $request)
     {
         $user = $request->user();
-
-        // if (!$user) {
-        //     return ApiResponse::setMessage('Unauthenticated')
-        //         ->response(Response::HTTP_UNAUTHORIZED);
-        // }
+        
         $user = $this->userService->getProfile($user->id);
         // info($user);
         return ApiResponse::setMessage('Profile fetched successfully')

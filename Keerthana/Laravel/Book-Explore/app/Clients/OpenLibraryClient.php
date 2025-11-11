@@ -2,8 +2,9 @@
 
 namespace App\Clients;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
+use App\Exceptions\ExternalApiException;
 use Illuminate\Http\Client\RequestException;
 
 class OpenLibraryClient
@@ -22,20 +23,22 @@ class OpenLibraryClient
                 ->acceptJson()
                 ->get("{$this->baseUrl}/search.json", [
                     'q' => $query,
-                    'limit' => 20
+                    // 'limit' => 20
                 ]);
 
             if ($response->failed()) {
-                throw new RequestException($response);
+                throw ExternalApiException::badResponse('OpenLibrary', $response->body());
             }
 
             return $response->json();
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            throw ExternalApiException::timeout('OpenLibrary');
         } catch (\Throwable $e) {
             Log::error('OpenLibrary searchBooks failed', [
                 'query' => $query,
                 'error' => $e->getMessage(),
             ]);
-            return null;
+            throw new ExternalApiException('Failed to communicate with OpenLibrary API.');
         }
     }
 

@@ -18,14 +18,8 @@ class ReviewController extends Controller
     }
     public function add(ReviewRequest $request)
     {
-        info('review added ');
         $userId = auth()->id();
         $result = $this->reviewService->addReview($userId, $request);
-
-        if (!$result) {
-            return ApiResponse::setMessage('Review already given')
-                ->response(Response::HTTP_CONFLICT);
-        }
 
         return ApiResponse::setMessage('Review added')
             ->setData($result)
@@ -39,12 +33,7 @@ class ReviewController extends Controller
         ]);
 
         $userId = auth()->id();
-        $removed = $this->reviewService->removeReview($userId, $request->book_id);
-
-        if (!$removed) {
-            return ApiResponse::setMessage('Review not found')
-                ->response(Response::HTTP_NOT_FOUND);
-        }
+        $this->reviewService->removeReview($userId, $request->book_id);
 
         return ApiResponse::setMessage('Review removed')
             ->response(Response::HTTP_OK);

@@ -34,7 +34,8 @@ class AuthService
             'password' => $data['password'],
         ]);
 
-        return $this->issueToken($data['email'],  $data['password']);
+        return [$user, $this->issueToken($data['email'],  $data['password'])];
+        // return $data;
     }
 
     /**
@@ -56,7 +57,7 @@ class AuthService
             ]);
         }
 
-        return $this->issueToken($data['email'],  $data['password']);
+        return [$user, $this->issueToken($data['email'],  $data['password'])];
     }
 
     /**
@@ -90,8 +91,9 @@ class AuthService
      * Create a PSR-7 ServerRequest and call Passport's AccessTokenController->issueToken()
      * to get access & refresh token response. We must supply the password client id and secret.
      */
-    protected function issueToken(string $email, string $password)
+    protected function issueToken(string $username, string $password)
     {
+        info('in issuetoken');
         $clientId = env('PASSPORT_PASSWORD_CLIENT_ID');
         $clientSecret = env('PASSPORT_PASSWORD_CLIENT_SECRET');
 
@@ -106,7 +108,7 @@ class AuthService
             'grant_type' => 'password',
             'client_id' => $clientId,
             'client_secret' => $clientSecret,
-            'username' => $email,
+            'username' => $username,
             'password' => $password,
             'scope' => '',
         ];

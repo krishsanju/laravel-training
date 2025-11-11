@@ -64,9 +64,9 @@ class UserService
             throw new \Exception('User not found');
         }
 
-        if ($user->is_blocked) {
-            return $user; // already blocked
-        }
+        // if ($user->is_blocked) {
+        //     return $user; // already blocked
+        // }
 
         $user->update([
             'is_blocked' => true,

@@ -30,11 +30,6 @@ class BookController extends Controller
     {
         $result = $this->booksService->storeBook($request->validated());
 
-        if($result['exists']){
-            return ApiResponse::setMessage('Book already exists')
-                    ->response(Response::HTTP_CONFLICT);
-        }
-
         return ApiResponse::setMessage('Book saved successfully')
                 ->setData($result['book'])
                 ->response(Response::HTTP_CREATED);

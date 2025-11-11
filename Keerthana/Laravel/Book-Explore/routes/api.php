@@ -37,6 +37,7 @@ Route::middleware(['auth:api', 'not_blocked'])->group(function () {
     Route::get('/profile/activity', [ProfileController::class, 'activity']);
 });
 
+//ADMIN ROUTES
 Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::get('/admin/users', [AdminController::class, 'users']);
     Route::get('/all-favorites', [AdminController::class, 'getAllFavorites']);
@@ -45,11 +46,12 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::delete('/remove-review-by-admin', [AdminController::class, 'remove']);
     Route::put('/block-user', [AdminController::class, 'blockUser']);
     Route::get('/reports/users-favorites-csv', [AdminController::class, 'exportUsersFavoritesCsv']);
+    Route::get('/reports/monthly-favorites/pdf', [AdminController::class, 'monthlyFavoritesPdf']);
 });
 
 
 //BOOKS
-Route::get('/books/search', [BookController::class, 'search']);
+Route::middleware(['throttle:book-search'])->get('/books/search', [BookController::class, 'search']);
 Route::get('/books/{id}', [BookController::class, 'show']);
 Route::post('/books', [BookController::class, 'store']);
 

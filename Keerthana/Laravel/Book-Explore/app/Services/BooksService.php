@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Clients\OpenLibraryClient;
 use Illuminate\Support\Facades\Http;
 use App\Repositories\BooksRepository;
+use App\Exceptions\ResourceNotFoundException;
+use App\Exceptions\BookAlreadyExistsException;
 
 class BooksService
 {
@@ -22,7 +24,7 @@ class BooksService
         $books = $response['docs'] ?? [];
 
         if (empty($books)) {
-            return [];
+            throw new ResourceNotFoundException('Book');
         }
 
         $firstBook = $books[0];
@@ -43,7 +45,7 @@ class BooksService
         $exists = $this->bookRepo->findByApiId($data['api_book_id']);
 
         if ($exists) {
-            return ['exists' => true, 'book' => $exists];
+            throw new BookAlreadyExistsException();
         }
 
         $book = $this->bookRepo->create($data);
@@ -52,6 +54,12 @@ class BooksService
 
     public function getBook($id)
     {
-        return $this->bookRepo->find($id);
+        $book = $this->bookRepo->find($id);
+
+        if (!$book) {
+            throw new ResourceNotFoundException('Book');
+        }
+
+        return $book;
     }
 }

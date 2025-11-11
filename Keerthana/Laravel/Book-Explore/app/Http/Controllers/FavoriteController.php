@@ -25,11 +25,6 @@ class FavoriteController extends Controller
         $userId = auth()->id();  //when we give bearer token we get the user details
         $result = $this->favoriteService->addFavorite($userId, $request->book_id);
 
-        if (!$result) {
-            return ApiResponse::setMessage('Book already in favorites')
-                ->response(Response::HTTP_CONFLICT);
-        }
-
         return ApiResponse::setMessage('Book added to favorites')
             ->setData($result)
             ->response(Response::HTTP_CREATED);
@@ -42,12 +37,7 @@ class FavoriteController extends Controller
         ]);
 
         $userId = auth()->id();
-        $removed = $this->favoriteService->removeFavorite($userId, $request->book_id);
-
-        if (!$removed) {
-            return ApiResponse::setMessage('Book not found in favorites')
-                ->response(Response::HTTP_NOT_FOUND);
-        }
+        $this->favoriteService->removeFavorite($userId, $request->book_id);
 
         return ApiResponse::setMessage('Book removed from favorites')
             ->response(Response::HTTP_OK);
