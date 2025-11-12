@@ -13,7 +13,8 @@ Route::prefix('/auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('refresh-token', [AuthController::class, 'refreshToken']);
 
-    // Route::post('forgot-password', [AuthController::class, 'forgotPassword']); //
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword']); //
+    Route::post('reset-password', [AuthController::class, 'resetPassword']);
     // Route::post('reset-password', [AuthController::class, 'resetPassword']); //
 
     // Route::get('verify-email/{id}/{hash}', [AuthController::class, 'verifyEmail'])
@@ -30,7 +31,7 @@ Route::middleware(['auth:api'])->group(function () {
 
 //
 Route::middleware(['auth:api', 'not_blocked'])->group(function () {
-// Route::middleware(['auth:api'])->group(function () {
+    // Route::middleware(['auth:api'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::delete('/profile', [ProfileController::class, 'destroy']);
@@ -68,4 +69,26 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/add-review', [ReviewController::class, 'add']);
     Route::delete('/remove-review', [ReviewController::class, 'remove']);
     // Route::get('/view-review', [ReviewController::class, 'list']);
+});
+
+Route::get('/test-info', function () {
+
+    // $arr = array('1' => 'foo');
+    // info($arr);
+
+    // $obj = (object) array('1' => 'foo');
+    // $objJson = json_encode($obj);
+    // info($objJson);
+
+
+    info("Hello");
+    info(123);
+    info('hai this is msg', [1, 2, 3]);
+    info(array(
+        'A' => 1,
+        'C' => 2,
+        'H' => 3,
+    ));
+    info('hai this is msg',(object)['x' => 1]); //error
+    // info(json_encode((object)['x' => 1]));
 });

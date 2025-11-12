@@ -13,16 +13,14 @@ use App\Services\AuthService;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Auth\RegisterRequest;
 use Nyholm\Psr7Server\ServerRequestCreator;
 use Psr\Http\Message\ServerRequestInterface;
-use Symfony\Component\HttpFoundation\Response;
 // use Nyholm\Psr7\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
@@ -67,124 +65,49 @@ class AuthController extends Controller
         return ApiResponse::setMessage('Login successful.')
             ->setData($response)
             ->response(Response::HTTP_OK);
-
-        // return ApiResponse::setData($data)
-        //     ->setMessage('Login successful')
-        //     ->response(Response::HTTP_OK);
-
-        // $validator = Validator::make($request->all(), [
-        //     'email' => 'required|email',
-        //     'password' => 'required|string',
-        // ]);
-
-
-        // if ($validator->fails()) {
-        //     return response()->json(['errors' => $validator->errors()], 422);
-        // }
-
-
-        // // use typical auth attempt
-        // if (!Auth::guard('web')->attempt($request->only('email', 'password'))) {
-        //     return response()->json(['error' => 'Invalid credentials'], 401);
-        // }
-
-
-        // return $this->issueToken($request->email, $request->password);
-    }
-
-    /**
-     * Create a PSR-7 ServerRequest and call Passport's AccessTokenController->issueToken()
-     * to get access & refresh token response. We must supply the password client id and secret.
-     */
-    protected function issueToken(string $username, string $password)
-    {
-        $clientId = env('PASSPORT_PASSWORD_CLIENT_ID');
-        $clientSecret = env('PASSPORT_PASSWORD_CLIENT_SECRET');
-
-
-        if (!$clientId || !$clientSecret) {
-            return response()->json(['error' => 'OAuth password client not configured. Run `php artisan passport:client --password` and add PASSPORT_PASSWORD_CLIENT_ID & _SECRET to .env'], 500);
-        }
-
-
-        // Build form parameters similar to an HTTP POST to /oauth/token
-        $params = [
-            'grant_type' => 'password',
-            'client_id' => $clientId,
-            'client_secret' => $clientSecret,
-            'username' => $username,
-            'password' => $password,
-            'scope' => '',
-        ];
-
-
-        // Create a PSR-7 ServerRequest using Nyholm
-        $psrFactory = $this->psr17Factory;
-
-
-        // Build URI and server parameters (you may want to set host, scheme etc.)
-        $uri = $psrFactory->createUri('/oauth/token');
-
-
-        // create server request
-        $serverRequest = $psrFactory->createServerRequest('POST', $uri, []);
-
-
-        // add parsed body (form parameters)
-        $serverRequest = $serverRequest->withParsedBody($params);
-
-
-        // Forward to Passport AccessTokenController
-        $accessTokenController = app(AccessTokenController::class);
-
-
-        // AccessTokenController->issueToken() accepts a Psr ServerRequestInterface
-        $psrResponse = $accessTokenController->issueToken($serverRequest, new Response());
-
-        return $psrResponse;
     }
 
     //REFRESH TOKEN
-    public function refreshToken(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'refresh_token' => 'required|string',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+    // public function refreshToken(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'refresh_token' => 'required|string',
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
 
-        // $data = $this->authService->refreshToken($request->refresh_token);
+    //     // $data = $this->authService->refreshToken($request->refresh_token);
 
-        // return ApiResponse::setData($data)
-        //     ->setMessage('Token refreshed successfully')
-        //     ->response(Response::HTTP_OK);
-
-
-        $clientId = env('PASSPORT_PASSWORD_CLIENT_ID');
-        $clientSecret = env('PASSPORT_PASSWORD_CLIENT_SECRET');
+    //     // return ApiResponse::setData($data)
+    //     //     ->setMessage('Token refreshed successfully')
+    //     //     ->response(Response::HTTP_OK);
 
 
-        $params = [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $request->refresh_token,
-            'client_id' => $clientId,
-            'client_secret' => $clientSecret,
-            'scope' => '',
-        ];
+    //     $clientId = env('PASSPORT_PASSWORD_CLIENT_ID');
+    //     $clientSecret = env('PASSPORT_PASSWORD_CLIENT_SECRET');
 
 
-        $psrFactory = $this->psr17Factory;
-        $uri = $psrFactory->createUri('/oauth/token');
-        $serverRequest = $psrFactory->createServerRequest('POST', $uri, []);
-        $serverRequest = $serverRequest->withParsedBody($params);
+    //     $params = [
+    //         'grant_type' => 'refresh_token',
+    //         'refresh_token' => $request->refresh_token,
+    //         'client_id' => $clientId,
+    //         'client_secret' => $clientSecret,
+    //         'scope' => '',
+    //     ];
 
 
-        $accessTokenController = app(AccessTokenController::class);
-        $psrResponse = $accessTokenController->issueToken($serverRequest, new Response());
+    //     $psrFactory = $this->psr17Factory;
+    //     $uri = $psrFactory->createUri('/oauth/token');
+    //     $serverRequest = $psrFactory->createServerRequest('POST', $uri, []);
+    //     $serverRequest = $serverRequest->withParsedBody($params);
 
-        return $psrResponse;
-    }
+
+    //     $accessTokenController = app(AccessTokenController::class);
+    //     $psrResponse = $accessTokenController->issueToken($serverRequest, new Response());
+
+    //     return $psrResponse;
+    // }
 
 
     //LOGOUT
@@ -231,5 +154,26 @@ class AuthController extends Controller
 
 
         return response()->json(['message' => 'Logged out successfully']);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+        $this->authService->forgotPassword($request->email);
+
+        return ApiResponse::setMessage('Password reset link sent')
+            ->response(Response::HTTP_OK);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'code' => 'required|numeric',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+
+        return ApiResponse::setMessage('Password reset successful')->response(200);
     }
 }

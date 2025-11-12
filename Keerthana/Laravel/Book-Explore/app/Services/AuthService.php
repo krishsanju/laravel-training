@@ -5,10 +5,17 @@ namespace App\Services;
 use App\Models\User;
 use Nyholm\Psr7\Response;
 use Illuminate\Http\Request;
+use App\Response\ApiResponse;
+use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
 use Nyholm\Psr7\Factory\Psr17Factory;
+use Illuminate\Support\Facades\Password;
 use App\Contracts\UserRepositoryInterface;
+use App\Exceptions\ResetCodeException;
+use App\Exceptions\ResourceNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
@@ -165,5 +172,44 @@ class AuthService
         $psrResponse = $accessTokenController->issueToken($serverRequest, new Response());
 
         return $psrResponse;
+    }
+
+    public function forgotPassword($email)
+    {
+        $user = User::whereEmail($email)->first();
+        if (!$user) {
+            throw new ResourceNotFoundException('User not found.');
+        }
+
+        $code = rand(100000, 999999);
+
+        Cache::put('password_reset_' . $user->email, $code, now()->addMinutes(10));
+
+        Mail::raw("Your password reset code is: {$code}", function ($msg) use ($user) {
+            $msg->to($user->email)->subject('Password Reset Code');
+        });
+    }
+
+    public function resetPassword($request)
+    {
+        $cachedCode = Cache::get('password_reset_' . $request->email);
+
+        if (!$cachedCode) {
+            throw new ResetCodeException('Reset code expired or not found', 400);
+        }
+
+        if ($cachedCode != $request->code) {
+            throw new ResetCodeException('Invalid reset code', 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            throw new ResourceNotFoundException('User not found.');
+        }
+
+        $user->update(['password' => $request->password]);
+
+        Cache::forget('password_reset_' . $request->email);
     }
 }
